@@ -394,27 +394,25 @@
                 React.createElement(Navbar, { key: 'navbar' }),                // Hero Section
                 React.createElement('section', {
                     key: 'hero',
-                    className: 'relative overflow-hidden flex items-center justify-center pt-16 pb-16',
-                    style: { minHeight: 'calc(100vh + 6rem)' }
+                    className: 'relative overflow-hidden flex items-center justify-center pt-20 pb-12 md:pt-16 md:pb-16',
+                    style: { minHeight: 'calc(100vh - 2rem)' }
                 }, [
                     React.createElement(BackgroundAnimation, { key: 'bg-animation' }),
-                    
-                    React.createElement('div', {
+                      React.createElement('div', {
                         key: 'hero-content',
-                        className: 'relative z-10 text-center px-4 max-w-6xl mx-auto'
+                        className: 'relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto'
                     }, [                        React.createElement('h1', {
                             key: 'title',
-                            className: 'text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse'
+                            className: 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse'
                         }, 'Custom AI Agents. Infinite Potential.'),
                         React.createElement('p', {
                             key: 'subtitle',
-                            className: 'text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-12 font-light opacity-90'
+                            className: 'text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-8 sm:mb-12 font-light opacity-90 px-2'
                         }, 'Automate engineering, project ops, accounting, sales & more—tailored end-to-end for SMBs.'),
-                        
-                        React.createElement('div', {
+                          React.createElement('div', {
                             key: 'cta-buttons',
-                            className: 'flex flex-col sm:flex-row gap-6 justify-center items-center mb-16'
-                        }, [                            React.createElement('button', {
+                            className: 'flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16'
+                        }, [React.createElement('button', {
                                 key: 'primary-cta',
                                 className: 'group relative px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full text-lg font-semibold hover:from-amber-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105',
                                 onClick: () => window.open('https://calendly.com/admin-antaresintelligence/30min', '_blank')
@@ -436,7 +434,7 @@
                         ]),                        // Feature highlights with icons
                         React.createElement('div', {
                             key: 'feature-highlights',
-                            className: 'grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16'
+                            className: 'grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-16 mb-8 sm:mb-16'
                         }, [React.createElement('div', {
                                 key: 'feature-1',
                                 className: 'feature-card group text-center p-6 rounded-lg bg-white/20 backdrop-blur-xl border border-white/30 hover:border-white/50 hover:bg-white/25 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-amber-500/20'
@@ -647,24 +645,23 @@
                     }, [                        React.createElement('h2', {
                             key: 'showcase-title',
                             className: 'text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 text-yellow-500'
-                        }, 'Case Studies'),React.createElement('div', {
-                            key: 'products-grid',
-                            className: 'relative space-y-20'
-                        }, [                            // Central timeline line
-                            React.createElement('div', {
-                                key: 'central-timeline',
-                                className: 'absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-amber-500 to-yellow-500 h-full z-0'
-                            }),
-                            
-                            // Sales Intelligence Card (Left Side)
-                            React.createElement('div', {
-                                key: 'sales-intelligence',
-                                className: 'relative flex items-center justify-start'
-                            }, [                                // Left card
-                                React.createElement('div', {
-                                    key: 'sales-card',
-                                    className: 'w-2/5 bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 hover:border-amber-400/70 hover:bg-white/25 mr-auto relative z-10 shadow-2xl hover:shadow-amber-500/20 transition-all duration-300'
-                                }, [
+                        }, 'Case Studies'),                React.createElement('div', {
+                    key: 'products-grid',
+                    className: 'relative grid grid-cols-1 lg:grid-cols-1 gap-20'
+                }, [                    // Central timeline line (hidden on mobile)
+                    React.createElement('div', {
+                        key: 'central-timeline',
+                        className: 'absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-amber-500 to-yellow-500 h-full z-0 hidden lg:block'
+                    }),
+                                      // Sales Intelligence Card (Left Side)
+                    React.createElement('div', {
+                        key: 'sales-intelligence',
+                        className: 'relative flex items-center justify-center lg:justify-start'
+                    }, [                        // Left card
+                        React.createElement('div', {
+                            key: 'sales-card',
+                            className: 'w-full lg:w-2/5 bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 hover:border-amber-400/70 hover:bg-white/25 lg:mr-auto relative z-10 shadow-2xl hover:shadow-amber-500/20 transition-all duration-300'
+                        }, [
                                     React.createElement('div', {
                                         key: 'sales-icon',
                                         className: 'text-4xl mb-4 text-center'
@@ -732,16 +729,15 @@
                                     ])
                                 ])
                             ]),
-                            
-                            // Contract Management Card (Right Side)
-                            React.createElement('div', {
-                                key: 'contract-management',
-                                className: 'relative flex items-center justify-end'
-                            }, [                                // Right card
-                                React.createElement('div', {
-                                    key: 'contract-card',
-                                    className: 'w-2/5 bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 hover:border-amber-400/70 hover:bg-white/25 ml-auto relative z-10 shadow-2xl hover:shadow-amber-500/20 transition-all duration-300'
-                                }, [
+                                      // Contract Management Card (Right Side)
+                    React.createElement('div', {
+                        key: 'contract-management',
+                        className: 'relative flex items-center justify-center lg:justify-end'
+                    }, [                        // Right card
+                        React.createElement('div', {
+                            key: 'contract-card',
+                            className: 'w-full lg:w-2/5 bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 hover:border-amber-400/70 hover:bg-white/25 lg:ml-auto relative z-10 shadow-2xl hover:shadow-amber-500/20 transition-all duration-300'
+                        }, [
                                     React.createElement('div', {
                                         key: 'contract-icon',
                                         className: 'text-4xl mb-4 text-center'
