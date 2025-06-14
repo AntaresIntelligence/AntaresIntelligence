@@ -390,11 +390,10 @@
                     })
                 ]),
                   // Navigation Bar
-                React.createElement(Navbar, { key: 'navbar' }),// Hero Section
-                React.createElement('section', {
+                React.createElement(Navbar, { key: 'navbar' }),// Hero Section                React.createElement('section', {
                     key: 'hero',
                     className: 'relative overflow-hidden flex items-center justify-center pt-16',
-                    style: { minHeight: 'calc(100vh + 4rem)' }
+                    style: { minHeight: 'calc(100vh + 2rem)' }
                 }, [
                     React.createElement(BackgroundAnimation, { key: 'bg-animation' }),
                     
@@ -403,11 +402,11 @@
                         className: 'relative z-10 text-center px-4 max-w-6xl mx-auto'
                     }, [                        React.createElement('h1', {
                             key: 'title',
-                            className: 'text-4xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse'
+                            className: 'text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse'
                         }, 'Custom AI Agents. Infinite Potential.'),
                         React.createElement('p', {
                             key: 'subtitle',
-                            className: 'text-xl md:text-3xl text-gray-300 mb-12 font-light opacity-90'
+                            className: 'text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-12 font-light opacity-90'
                         }, 'Automate engineering, project ops, accounting, sales & more—tailored end-to-end for SMBs.'),
                         
                         React.createElement('div', {
@@ -503,14 +502,14 @@
                 ]),                // Microsoft Partnership Section
                 React.createElement('section', {
                     key: 'microsoft-partnership',
-                    className: 'py-24 px-4'
+                    className: 'py-16 md:py-24 px-4'
                 }, [
                     React.createElement('div', {
                         key: 'microsoft-container',
                         className: 'max-w-7xl mx-auto'
                     }, [                        React.createElement('div', {
                             key: 'microsoft-content',
-                            className: 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'
+                            className: 'grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center'
                         }, [
                             // Left side - Microsoft badge (standalone card)
                             React.createElement('div', {
@@ -535,7 +534,7 @@
                                 className: 'space-y-6'
                             }, [                                React.createElement('h2', {
                                     key: 'microsoft-title',
-                                    className: 'text-4xl lg:text-5xl font-bold text-yellow-500 mb-6 text-center'
+                                    className: 'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-500 mb-6 text-center'
                                 }, 'Antares Intelligence is now backed by Microsoft'),
                                 React.createElement('p', {
                                     key: 'microsoft-para-1',
@@ -554,33 +553,30 @@
                                 }, 'We are immensely grateful for Microsoft\'s recognition and support of our vision. This collaboration will enable us to harness the power of advanced technologies to solve complex challenges and help our customers achieve their goals faster.')
                             ])
                         ])
-                    ])                ]),
-
-                // Services Section
+                    ])                ]),                // Services Section
                 React.createElement('section', {
                     key: 'services',
                     id: 'solutions',
-                    className: 'py-32 px-4'
+                    className: 'py-16 md:py-32 px-4'
                 }, [
                     React.createElement(ServicesGrid, { key: 'services-grid' })
-                ]),// Problem Section
+                ]),                // Problem Section
                 React.createElement('section', {
                     key: 'problem',
                     id: 'benefits',
-                    className: 'py-32 px-4'
+                    className: 'py-16 md:py-32 px-4'
                 }, [
                     React.createElement('div', {
                         key: 'problem-container',
                         className: 'max-w-6xl mx-auto'
                     }, [                        React.createElement('h2', {
                             key: 'problem-title',
-                            className: 'text-5xl font-bold text-center mb-16 text-amber-500'
+                            className: 'text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 text-amber-500'
                         }, 'The Hidden Cost of Manual Work'),
-                        
-                        React.createElement('div', {
+                          React.createElement('div', {
                             key: 'problem-content',
-                            className: 'grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'
-                        }, [                            React.createElement('div', {
+                            className: 'grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center'
+                        }, [React.createElement('div', {
                                 key: 'problem-list',
                                 className: 'space-y-8'
                             }, [                                React.createElement('div', {
@@ -657,14 +653,14 @@
                 ]),                // Product Showcase
                 React.createElement('section', {
                     key: 'product-showcase',
-                    className: 'py-32 px-4'
+                    className: 'py-16 md:py-32 px-4'
                 }, [
                     React.createElement('div', {
                         key: 'showcase-container',
                         className: 'max-w-7xl mx-auto'
                     }, [                        React.createElement('h2', {
                             key: 'showcase-title',
-                            className: 'text-5xl font-bold text-center mb-16 text-yellow-500'
+                            className: 'text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 text-yellow-500'
                         }, 'End-to-End Solution'),React.createElement('div', {
                             key: 'products-grid',
                             className: 'relative space-y-20'
@@ -844,7 +840,7 @@
                 ]),                // Mission Statement Section
                 React.createElement('section', {
                     key: 'mission',
-                    className: 'py-32 px-4'
+                    className: 'py-16 md:py-32 px-4'
                 }, [
                     React.createElement('div', {
                         key: 'mission-container',
@@ -925,23 +921,21 @@
                             ])
                         ))                    ])
                 }),
-                */
-
-                // Conversion Hub
+                */                // Conversion Hub
                 React.createElement('section', {
                     key: 'conversion-hub',
                     id: 'contact',
-                    className: 'py-32 px-4'
+                    className: 'py-16 md:py-32 px-4'
                 }, [
                     React.createElement('div', {
                         key: 'conversion-container',
                         className: 'max-w-6xl mx-auto'
                     }, [                        React.createElement('h2', {
                             key: 'conversion-title',
-                            className: 'text-5xl font-bold text-center mb-16 text-amber-500'
+                            className: 'text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 text-amber-500'
                         }, 'Ready to Transform Your Business?'),                        React.createElement('div', {
                             key: 'conversion-grid',
-                            className: 'grid grid-cols-1 lg:grid-cols-2 gap-8'
+                            className: 'grid grid-cols-1 md:grid-cols-2 gap-8'
                         }, [
                             // Calendly Integration
                             React.createElement('div', {
