@@ -49,14 +49,27 @@
       <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
       <!-- Calendly -->    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    
-    <!-- Flowise Chatbot -->
+      <!-- Flowise Chatbot -->
     <script type="module">
         import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
         Chatbot.init({
             chatflowid: "75e6cc05-010a-4f28-8cf5-82b705600e9d",
             apiHost: "https://flowise-gk99.onrender.com",
         })
+    </script>
+      <!-- Apollo.io Tracking -->
+    <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+o.onload=function(){window.trackingFunctions.onLoad({appId:"666d04e9afbf87038c38c4b6"})},
+document.head.appendChild(o)}initApollo();</script>
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "pu4s447cbz");
     </script>
     
       <!-- Custom styles -->
@@ -477,11 +490,10 @@
                     }, [React.createElement('h1', {
                             key: 'title',
                             className: 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse'
-                        }, 'Custom AI Agents. Infinite Potential.'),
-                        React.createElement('p', {
+                        }, 'Custom AI Agents. Infinite Potential.'),                        React.createElement('p', {
                             key: 'subtitle',
                             className: 'text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-8 sm:mb-12 font-light opacity-90 px-2'
-                        }, 'Automate engineering, project ops, accounting, sales & more—tailored end-to-end for SMBs.'),
+                        }, 'Automate engineering, project ops, accounting, sales & more tailored end to end for SMBs.'),
                           React.createElement('div', {
                             key: 'cta-buttons',
                             className: 'flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16'
