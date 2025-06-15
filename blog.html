@@ -200,10 +200,10 @@
                         animationDuration: '3s',
                         animationDelay: '1s'
                     }
-                })
-            ]);
+                })            ]);
         }
-          // Navigation Bar Component
+        
+        // Navigation Bar Component
         function Navbar() {
             const [isScrolled, setIsScrolled] = useState(false);
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -214,14 +214,55 @@
                 };
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
+            }, []);            useEffect(() => {
+                // Handle body scroll lock when mobile menu is open
+                if (isMobileMenuOpen) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+                
+                // Handle escape key
+                const handleEscape = (e) => {
+                    if (e.key === 'Escape' && isMobileMenuOpen) {
+                        setIsMobileMenuOpen(false);
+                    }
+                };
+                
+                // Handle window resize - close menu if desktop size
+                const handleResize = () => {
+                    if (window.innerWidth >= 768 && isMobileMenuOpen) {
+                        setIsMobileMenuOpen(false);
+                    }
+                };
+                
+                document.addEventListener('keydown', handleEscape);
+                window.addEventListener('resize', handleResize);
+                return () => {
+                    document.removeEventListener('keydown', handleEscape);
+                    window.removeEventListener('resize', handleResize);
+                    document.body.style.overflow = '';
+                };
+            }, [isMobileMenuOpen]);
 
-            const toggleMobileMenu = () => {
-                setIsMobileMenuOpen(!isMobileMenuOpen);
+            const toggleMobileMenu = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsMobileMenuOpen(prev => !prev);
             };
 
             const closeMobileMenu = () => {
                 setIsMobileMenuOpen(false);
+            };
+
+            const handleOverlayClick = (e) => {
+                if (e.target === e.currentTarget) {
+                    closeMobileMenu();
+                }
+            };
+
+            const handleLinkClick = () => {
+                closeMobileMenu();
             };
 
             return React.createElement('nav', {
@@ -285,17 +326,16 @@
                                 href: 'index.html#contact',
                                 className: 'bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg font-medium transition-colors duration-200'
                             }, 'Get Started')
-                        ]),
-
-                        // Mobile menu button
+                        ]),                        // Mobile menu button
                         React.createElement('div', {
                             key: 'mobile-button',
                             className: 'md:hidden'
                         },
                             React.createElement('button', {
                                 onClick: toggleMobileMenu,
-                                className: 'text-gray-300 hover:text-white focus:outline-none focus:text-white',
-                                'aria-label': 'Toggle mobile menu'
+                                className: 'text-gray-300 hover:text-white focus:outline-none focus:text-white relative z-60',
+                                'aria-label': 'Toggle mobile menu',
+                                type: 'button'
                             }, [
                                 isMobileMenuOpen ? 
                                 React.createElement('svg', {
@@ -325,18 +365,18 @@
                             ])
                         )
                     ])
-                ),
-
-                // Mobile Menu Overlay and Panel
+                ),                // Mobile Menu Overlay and Panel
                 isMobileMenuOpen && React.createElement('div', {
                     key: 'mobile-menu-overlay',
                     className: 'fixed inset-0 z-40 bg-black/50 md:hidden',
-                    onClick: closeMobileMenu
+                    onClick: handleOverlayClick,
+                    style: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }
                 }, [
                     React.createElement('div', {
                         key: 'mobile-menu-panel',
                         className: 'fixed left-0 top-0 h-full w-80 bg-gray-900 border-r border-white/10 flex flex-col',
-                        onClick: (e) => e.stopPropagation()
+                        onClick: (e) => e.stopPropagation(),
+                        style: { position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 50 }
                     }, [
                         // Menu Header
                         React.createElement('div', {
@@ -363,12 +403,11 @@
                         React.createElement('div', {
                             key: 'menu-items',
                             className: 'flex-1 px-4 py-6 space-y-2'
-                        }, [
-                            React.createElement('a', {
+                        }, [                            React.createElement('a', {
                                 key: 'mobile-home',
                                 href: 'index.html',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, React.createElement('div', {
                                 className: 'flex items-center space-x-3'
                             }, [
@@ -391,7 +430,7 @@
                                 key: 'mobile-solutions',
                                 href: 'index.html#solutions',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, React.createElement('div', {
                                 className: 'flex items-center space-x-3'
                             }, [
@@ -414,7 +453,7 @@
                                 key: 'mobile-benefits',
                                 href: 'index.html#benefits',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, React.createElement('div', {
                                 className: 'flex items-center space-x-3'
                             }, [
@@ -453,9 +492,7 @@
                                 })),
                                 React.createElement('span', { key: 'blog-text' }, 'Blog')
                             ]))
-                        ]),
-
-                        // CTA Button
+                        ]),                        // CTA Button
                         React.createElement('div', {
                             key: 'menu-cta',
                             className: 'p-4 border-t border-white/10'
@@ -463,7 +500,7 @@
                             React.createElement('a', {
                                 href: 'index.html#contact',
                                 className: 'block w-full bg-amber-500 hover:bg-amber-600 text-black px-6 py-3 rounded-lg font-semibold text-center transition-colors duration-200',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, 'Get Started')
                         )
                     ])

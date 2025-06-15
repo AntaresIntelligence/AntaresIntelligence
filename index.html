@@ -343,16 +343,58 @@
                 const handleScroll = () => {
                     setIsScrolled(window.scrollY > 50);
                 };
+                
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
+            }, []);            useEffect(() => {
+                // Handle body scroll lock when mobile menu is open
+                if (isMobileMenuOpen) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+                
+                // Handle escape key
+                const handleEscape = (e) => {
+                    if (e.key === 'Escape' && isMobileMenuOpen) {
+                        setIsMobileMenuOpen(false);
+                    }
+                };
+                
+                // Handle window resize - close menu if desktop size
+                const handleResize = () => {
+                    if (window.innerWidth >= 768 && isMobileMenuOpen) {
+                        setIsMobileMenuOpen(false);
+                    }
+                };
+                
+                document.addEventListener('keydown', handleEscape);
+                window.addEventListener('resize', handleResize);
+                return () => {
+                    document.removeEventListener('keydown', handleEscape);
+                    window.removeEventListener('resize', handleResize);
+                    document.body.style.overflow = '';
+                };
+            }, [isMobileMenuOpen]);
 
-            const toggleMobileMenu = () => {
-                setIsMobileMenuOpen(!isMobileMenuOpen);
+            const toggleMobileMenu = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsMobileMenuOpen(prev => !prev);
             };
 
             const closeMobileMenu = () => {
                 setIsMobileMenuOpen(false);
+            };
+
+            const handleOverlayClick = (e) => {
+                if (e.target === e.currentTarget) {
+                    closeMobileMenu();
+                }
+            };
+
+            const handleLinkClick = () => {
+                closeMobileMenu();
             };
 
             return React.createElement('nav', {
@@ -418,8 +460,9 @@
                         },
                             React.createElement('button', {
                                 onClick: toggleMobileMenu,
-                                className: 'text-gray-300 hover:text-white focus:outline-none focus:text-white',
-                                'aria-label': 'Toggle mobile menu'
+                                className: 'text-gray-300 hover:text-white focus:outline-none focus:text-white relative z-60',
+                                'aria-label': 'Toggle mobile menu',
+                                type: 'button'
                             }, [
                                 isMobileMenuOpen ? 
                                 React.createElement('svg', {
@@ -455,12 +498,14 @@
                 isMobileMenuOpen && React.createElement('div', {
                     key: 'mobile-menu-overlay',
                     className: 'fixed inset-0 z-40 bg-black/50 md:hidden',
-                    onClick: closeMobileMenu
+                    onClick: handleOverlayClick,
+                    style: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }
                 }, [
                     React.createElement('div', {
                         key: 'mobile-menu-panel',
                         className: 'fixed left-0 top-0 h-full w-80 bg-gray-900 border-r border-white/10 flex flex-col',
-                        onClick: (e) => e.stopPropagation()
+                        onClick: (e) => e.stopPropagation(),
+                        style: { position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 50 }
                     }, [
                         // Menu Header
                         React.createElement('div', {
@@ -492,7 +537,7 @@
                                 key: 'mobile-solutions',
                                 href: '#solutions',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, React.createElement('div', {
                                 className: 'flex items-center space-x-3'
                             }, [
@@ -515,7 +560,7 @@
                                 key: 'mobile-benefits',
                                 href: '#benefits',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, React.createElement('div', {
                                 className: 'flex items-center space-x-3'
                             }, [
@@ -538,7 +583,7 @@
                                 key: 'mobile-blog',
                                 href: 'blog.html',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, React.createElement('div', {
                                 className: 'flex items-center space-x-3'
                             }, [
@@ -566,7 +611,7 @@
                             React.createElement('a', {
                                 href: '#contact',
                                 className: 'block w-full bg-amber-500 hover:bg-amber-600 text-black px-6 py-3 rounded-lg font-semibold text-center transition-colors duration-200',
-                                onClick: closeMobileMenu
+                                onClick: handleLinkClick
                             }, 'Get Started')
                         )
                     ])
@@ -763,21 +808,20 @@
                             }, [                                React.createElement('h2', {
                                     key: 'microsoft-title',
                                     className: 'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-500 mb-6 text-center'
-                                }, 'Antares Intelligence is now backed by Microsoft'),
-                                React.createElement('p', {
+                                }, 'Antares Intelligence is now backed by Microsoft'),                                React.createElement('p', {
                                     key: 'microsoft-para-1',
-                                    className: 'text-gray-300 text-lg leading-relaxed mb-4'
+                                    className: 'text-gray-300 text-lg leading-relaxed mb-4 text-center'
                                 }, 'We are thrilled to share that Antares Intelligence has officially partnered with Microsoft through its Microsoft for Startups program. This marks a pivotal milestone in our mission to make AI solutions accessible and affordable for small and medium-sized businesses.'),
                                 React.createElement('p', {
                                     key: 'microsoft-para-2',
-                                    className: 'text-gray-300 text-lg leading-relaxed mb-4'
+                                    className: 'text-gray-300 text-lg leading-relaxed mb-4 text-center'
                                 }, 'By collaborating with one of the world\'s most trusted technology leaders, Antares Intelligence gains access to cutting-edge tools, resources, and infrastructure that will help us accelerate growth and deliver even more value to our customers. With Microsoft\'s support, we\'re better equipped to refine our AI solutions, enhance customer experiences, and drive innovation in every facet of our operations.'),
                                 React.createElement('p', {
                                     key: 'microsoft-para-3',
-                                    className: 'text-gray-300 text-lg leading-relaxed mb-4'
+                                    className: 'text-gray-300 text-lg leading-relaxed mb-4 text-center'
                                 }, 'This partnership empowers us to scale our capabilities and bring AI closer to businesses of all sizes. It strengthens our mission to make AI affordable, accessible, and impactful for companies seeking smarter workflows, deeper insights, and meaningful growth.'),                                React.createElement('p', {
                                     key: 'microsoft-para-4',
-                                    className: 'text-gray-300 text-lg leading-relaxed'
+                                    className: 'text-gray-300 text-lg leading-relaxed text-center'
                                 }, 'We are immensely grateful for Microsoft\'s recognition and support of our vision. This collaboration will enable us to harness the power of advanced technologies to solve complex challenges and help our customers achieve their goals faster.')
                             ])
                         ])
