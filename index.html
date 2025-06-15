@@ -425,8 +425,7 @@
                                 key: 'brand-text',
                                 className: 'text-2xl text-white'
                             }, 'Antares Intelligence')
-                        ]),
-                          // Desktop Navigation Links
+                        ]),                        // Desktop Navigation Links
                         React.createElement('div', {
                             key: 'nav-links',
                             className: 'hidden md:flex items-center space-x-8'
@@ -436,6 +435,11 @@
                                 href: '#solutions',
                                 className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
                             }, 'Solutions'),
+                            React.createElement('a', {
+                                key: 'services',
+                                href: 'services.html',
+                                className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
+                            }, 'Services'),
                             React.createElement('a', {
                                 key: 'benefits',
                                 href: '#benefits',
@@ -532,8 +536,7 @@
                         React.createElement('div', {
                             key: 'menu-items',
                             className: 'flex-1 px-4 py-6 space-y-2'
-                        }, [
-                            React.createElement('a', {
+                        }, [                            React.createElement('a', {
                                 key: 'mobile-solutions',
                                 href: '#solutions',
                                 className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
@@ -554,6 +557,29 @@
                                     d: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'
                                 })),
                                 React.createElement('span', { key: 'solutions-text' }, 'Solutions')
+                            ])),
+
+                            React.createElement('a', {
+                                key: 'mobile-services',
+                                href: 'services.html',
+                                className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
+                                onClick: handleLinkClick
+                            }, React.createElement('div', {
+                                className: 'flex items-center space-x-3'
+                            }, [
+                                React.createElement('svg', {
+                                    key: 'services-icon',
+                                    className: 'w-5 h-5',
+                                    fill: 'none',
+                                    stroke: 'currentColor',
+                                    viewBox: '0 0 24 24'
+                                }, React.createElement('path', {
+                                    strokeLinecap: 'round',
+                                    strokeLinejoin: 'round',
+                                    strokeWidth: '2',
+                                    d: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2v0'
+                                })),
+                                React.createElement('span', { key: 'services-text' }, 'Services')
                             ])),
 
                             React.createElement('a', {
