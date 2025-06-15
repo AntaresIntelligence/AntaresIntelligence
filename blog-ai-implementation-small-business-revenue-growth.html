@@ -62,12 +62,13 @@
             apiHost: "https://flowise-gk99.onrender.com",
         })
     </script>
-    
-    <!-- Custom styles -->
+      <!-- Custom styles -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom right, #111827, #1f2937, #7c2d12);
             min-height: 100vh;
         }
         
@@ -85,11 +86,55 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Consistent font sizes */
+        .text-blog-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+        
+        .text-blog-subtitle {
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+        
+        .text-blog-body {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .text-blog-large {
+            font-size: 1.125rem;
+            line-height: 1.6;
+        }
+        
+        @media (min-width: 768px) {
+            .text-blog-title {
+                font-size: 3rem;
+            }
+            .text-blog-subtitle {
+                font-size: 1.875rem;
+            }
+        }
+        
+        /* Consistent spacing */
+        .section-spacing {
+            margin-bottom: 3rem;
+        }
+        
+        /* Consistent highlight colors */
+        .highlight-stat {
+            color: #f59e0b;
+            font-weight: 700;
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+<body class="bg-gray-900 text-white">    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-md border-b border-white/10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
@@ -103,8 +148,9 @@
                 <!-- Navigation Links -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-gray-300 hover:text-amber-400 transition-colors duration-200">Home</a>
+                    <a href="index.html#solutions" class="text-gray-300 hover:text-amber-400 transition-colors duration-200">Solutions</a>
                     <a href="blog.html" class="text-amber-400 font-medium">Blog</a>
-                    <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg font-medium transition-colors duration-200">Contact</a>
+                    <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg font-medium transition-colors duration-200">Get Started</a>
                 </div>
                 
                 <!-- Mobile menu button -->
@@ -141,10 +187,9 @@
                         🚀 AI Strategy
                     </span>
                 </div>
-                
-                <!-- Title -->
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                    AI Implementation for Small Business: How 91% of SMBs Achieve Revenue Growth in 2025
+                  <!-- Title -->
+                <h1 class="text-blog-title font-bold text-white mb-6 leading-tight">
+                    AI Implementation for Small Business: How <span class="highlight-stat">91%</span> of SMBs Achieve Revenue Growth in 2025
                 </h1>
                 
                 <!-- Meta Information -->
@@ -170,80 +215,75 @@
                 </div>
             </header>            <!-- Article Content -->
             <article class="content-area rounded-2xl p-8 md:p-12 animate-fade-in">
-                <div class="prose prose-invert prose-amber max-w-none">
-                    <!-- Bottom Line Up Front -->
-                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-6 mb-8">
-                        <h2 class="text-2xl font-bold text-amber-400 mb-4 flex items-center">
+                <div class="prose prose-invert prose-amber max-w-none">                    <!-- Bottom Line Up Front -->
+                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-6 mb-8 section-spacing">
+                        <h2 class="text-blog-subtitle font-bold text-amber-400 mb-4 flex items-center">
                             <span class="text-2xl mr-2">⚡</span>
                             Bottom Line Up Front
                         </h2>
-                        <p class="text-lg text-gray-200 leading-relaxed">
-                            75% of small businesses are actively experimenting with AI, and 91% of those using AI report direct revenue growth. The difference between success and failure isn't choosing the right technology—it's following a strategic implementation framework that matches AI capabilities to your specific business constraints.
+                        <p class="text-blog-large text-gray-200 leading-relaxed">
+                            <span class="highlight-stat">75%</span> of small businesses are actively experimenting with AI, and <span class="highlight-stat">91%</span> of those using AI report direct revenue growth. The difference between success and failure isn't choosing the right technology—it's following a strategic implementation framework that matches AI capabilities to your specific business constraints.
                         </p>
                     </div>
 
                     <!-- Introduction -->
-                    <p class="text-xl text-gray-300 leading-relaxed mb-8">
-                        The AI revolution has arrived for small and medium-sized businesses, and the numbers tell a compelling story. Recent data shows that 78% of organizations now use AI in at least one business function, representing a dramatic 23-point jump from the previous year. Among SMBs that have successfully implemented AI, an overwhelming 91% report it directly boosts their revenue, with average returns of $3.7 for every $1 invested.
+                    <p class="text-blog-large text-gray-300 leading-relaxed mb-6">
+                        The AI revolution has arrived for small and medium-sized businesses, and the numbers tell a compelling story. Recent data shows that <span class="highlight-stat">78%</span> of organizations now use AI in at least one business function, representing a dramatic 23-point jump from the previous year. Among SMBs that have successfully implemented AI, an overwhelming <span class="highlight-stat">91%</span> report it directly boosts their revenue, with average returns of <span class="highlight-stat">$3.7</span> for every $1 invested.
                     </p>
 
-                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                    <p class="text-blog-body text-gray-300 leading-relaxed mb-6">
                         But here's what separates the winners from those struggling to see results: successful AI implementation for small business isn't about adopting every new tool or chasing flashy features. It's about following a proven, step-by-step approach that aligns AI capabilities with your specific operational needs, budget constraints, and technical resources.
                     </p>
 
-                    <p class="text-lg text-gray-300 leading-relaxed mb-12">
-                        If you're among the 77% of small business leaders planning AI initiatives this year, this comprehensive guide provides the exact framework that successful SMBs use to achieve measurable results. We'll cut through the hype and give you the practical roadmap to transform your operations, enhance customer experiences, and drive sustainable growth—all while avoiding the costly mistakes that derail 74% of AI projects.
+                    <p class="text-blog-body text-gray-300 leading-relaxed section-spacing">
+                        If you're among the <span class="highlight-stat">77%</span> of small business leaders planning AI initiatives this year, this comprehensive guide provides the exact framework that successful SMBs use to achieve measurable results. We'll cut through the hype and give you the practical roadmap to transform your operations, enhance customer experiences, and drive sustainable growth—all while avoiding the costly mistakes that derail <span class="highlight-stat">74%</span> of AI projects.
                     </p>
 
                     <!-- Section 1 -->
-                    <h2 class="text-3xl font-bold text-white mb-6 mt-12">Why 75% of Small Businesses Are Racing to Implement AI (And Why Timing Matters)</h2>
+                    <h2 class="text-blog-subtitle font-bold text-white mb-6">Why <span class="highlight-stat">75%</span> of Small Businesses Are Racing to Implement AI (And Why Timing Matters)</h2>
                     
-                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                        The urgency around AI implementation for small business isn't driven by hype—it's driven by competitive necessity. Growing SMBs are adopting AI at 83% rates compared to just 32% for declining businesses, creating a clear correlation between AI adoption and business success.
+                    <p class="text-blog-body text-gray-300 leading-relaxed mb-6">
+                        The urgency around AI implementation for small business isn't driven by hype—it's driven by competitive necessity. Growing SMBs are adopting AI at <span class="highlight-stat">83%</span> rates compared to just <span class="highlight-stat">32%</span> for declining businesses, creating a clear correlation between AI adoption and business success.
                     </p>
 
-                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    <p class="text-blog-body text-gray-300 leading-relaxed mb-6">
                         The statistics reveal three critical drivers pushing SMBs toward AI implementation:
-                    </p>
-
-                    <!-- Competitive Pressure -->
+                    </p>                    <!-- Competitive Pressure -->
                     <div class="bg-gray-800/50 rounded-lg p-6 mb-6">
-                        <h3 class="text-xl font-semibold text-amber-400 mb-4">Competitive Pressure is Intensifying:</h3>
-                        <ul class="text-gray-300 space-y-2">
-                            <li>• 78% of SMBs believe AI gives competitors unfair advantages.</li>
-                            <li>• Early AI adopters report 25% higher customer satisfaction scores.</li>
-                            <li>• Companies using AI in customer service see 30% improvement in response times.</li>
+                        <h3 class="text-blog-body font-semibold text-amber-400 mb-4">Competitive Pressure is Intensifying:</h3>
+                        <ul class="text-blog-body text-gray-300 space-y-2">
+                            <li>• <span class="highlight-stat">78%</span> of SMBs believe AI gives competitors unfair advantages.</li>
+                            <li>• Early AI adopters report <span class="highlight-stat">25%</span> higher customer satisfaction scores.</li>
+                            <li>• Companies using AI in customer service see <span class="highlight-stat">30%</span> improvement in response times.</li>
                         </ul>
                     </div>
 
                     <!-- Labor Market Challenges -->
                     <div class="bg-gray-800/50 rounded-lg p-6 mb-6">
-                        <h3 class="text-xl font-semibold text-amber-400 mb-4">Labor Market Challenges Demand Automation:</h3>
-                        <ul class="text-gray-300 space-y-2">
-                            <li>• 69% of SMBs struggle to find qualified employees.</li>
+                        <h3 class="text-blog-body font-semibold text-amber-400 mb-4">Labor Market Challenges Demand Automation:</h3>
+                        <ul class="text-blog-body text-gray-300 space-y-2">
+                            <li>• <span class="highlight-stat">69%</span> of SMBs struggle to find qualified employees.</li>
                             <li>• AI helps small businesses compete for talent by augmenting existing capabilities.</li>
-                            <li>• Businesses report saving 13 hours weekly per owner through AI automation.</li>
+                            <li>• Businesses report saving <span class="highlight-stat">13 hours</span> weekly per owner through AI automation.</li>
                         </ul>
                     </div>
 
                     <!-- Customer Expectations -->
                     <div class="bg-gray-800/50 rounded-lg p-6 mb-8">
-                        <h3 class="text-xl font-semibold text-amber-400 mb-4">Customer Expectations Have Shifted:</h3>
-                        <ul class="text-gray-300 space-y-2">
-                            <li>• 73% of customers expect 24/7 support availability.</li>
-                            <li>• Personalized experiences drive 25% higher conversion rates.</li>
-                            <li>• AI-powered businesses achieve 82% faster lead qualification.</li>
+                        <h3 class="text-blog-body font-semibold text-amber-400 mb-4">Customer Expectations Have Shifted:</h3>
+                        <ul class="text-blog-body text-gray-300 space-y-2">
+                            <li>• <span class="highlight-stat">73%</span> of customers expect 24/7 support availability.</li>
+                            <li>• Personalized experiences drive <span class="highlight-stat">25%</span> higher conversion rates.</li>
+                            <li>• AI-powered businesses achieve <span class="highlight-stat">82%</span> faster lead qualification.</li>
                         </ul>
-                    </div>
-
-                    <p class="text-lg text-gray-300 leading-relaxed mb-12">
-                        The window for strategic AI implementation is closing. While 75% of SMBs are experimenting with AI, only 34% have achieved full operational integration. This gap represents both the challenge and the opportunity facing small businesses today.
+                    </div>                    <p class="text-blog-body text-gray-300 leading-relaxed section-spacing">
+                        The window for strategic AI implementation is closing. While <span class="highlight-stat">75%</span> of SMBs are experimenting with AI, only <span class="highlight-stat">34%</span> have achieved full operational integration. This gap represents both the challenge and the opportunity facing small businesses today.
                     </p>
 
                     <!-- Step 1 -->
-                    <h2 class="text-3xl font-bold text-white mb-6 mt-12">Step 1: Identify High-Impact AI Opportunities for Small Business Success</h2>
+                    <h2 class="text-blog-subtitle font-bold text-white mb-6">Step 1: Identify High-Impact AI Opportunities for Small Business Success</h2>
                     
-                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    <p class="text-blog-body text-gray-300 leading-relaxed mb-6">
                         The biggest mistake SMBs make? Trying to "AI everything" at once. Smart businesses start by identifying where AI implementation for small business can deliver immediate, measurable value. Research shows three areas consistently provide the highest ROI for small businesses:
                     </p>
 
@@ -346,13 +386,11 @@
                         </ul>
 
                         <p class="text-amber-400 font-medium">Focus on opportunities scoring 7+ on impact with 6 or lower on effort for your first AI implementation project.</p>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <h2 class="text-3xl font-bold text-white mb-6 mt-12">Step 2: Build Your AI-Ready Foundation Without Breaking the Bank</h2>
+                    </div>                    <!-- Step 2 -->
+                    <h2 class="text-blog-subtitle font-bold text-white mb-6 section-spacing">Step 2: Build Your AI-Ready Foundation Without Breaking the Bank</h2>
                     
-                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                        Here's the reality that stops many SMBs: 51% cite cost as their primary barrier to AI adoption, while 35% worry about lacking technical skills. The good news? You don't need massive infrastructure investments to start seeing AI benefits.
+                    <p class="text-blog-body text-gray-300 leading-relaxed mb-6">
+                        Here's the reality that stops many SMBs: <span class="highlight-stat">51%</span> cite cost as their primary barrier to AI adoption, while <span class="highlight-stat">35%</span> worry about lacking technical skills. The good news? You don't need massive infrastructure investments to start seeing AI benefits.
                     </p>
 
                     <!-- Data Infrastructure -->
@@ -496,14 +534,12 @@
                         </div>
                     </div>
                 </div>
-            </article>
-
-            <!-- Call to Action -->
+            </article>            <!-- Call to Action -->
             <section class="mt-12 text-center animate-fade-in">
                 <div class="content-area rounded-2xl p-8">
-                    <h3 class="text-2xl font-bold text-white mb-4">Ready to Transform Your Business with AI?</h3>
-                    <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
-                        Don't wait for the competition to get ahead. Start your AI transformation journey today with Antares Intelligence.
+                    <h3 class="text-blog-subtitle font-bold text-white mb-4">Ready to Transform Your Business with AI?</h3>
+                    <p class="text-blog-body text-gray-300 mb-6 max-w-2xl mx-auto">
+                        Don't wait for the competition to get ahead. Join the <span class="highlight-stat">91%</span> of successful SMBs and start your AI transformation journey today with Antares Intelligence.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-black px-8 py-3 rounded-lg font-semibold transition-colors duration-200">
@@ -516,10 +552,8 @@
                 </div>
             </section>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+    </main>    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-white/10 py-8 mt-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="flex items-center space-x-3 mb-4 md:mb-0">
