@@ -36,10 +36,15 @@
     <meta name="theme-color" content="#f59e0b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- Favicon -->
+      <!-- Favicon -->
     <link rel="icon" type="image/png" href="AntaresIntelligence.png">
     <link rel="apple-touch-icon" href="AntaresIntelligence.png">
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
       <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -49,27 +54,14 @@
       <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
       <!-- Calendly -->    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <!-- Flowise Chatbot -->
+    
+    <!-- Flowise Chatbot -->
     <script type="module">
         import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
         Chatbot.init({
             chatflowid: "75e6cc05-010a-4f28-8cf5-82b705600e9d",
             apiHost: "https://flowise-gk99.onrender.com",
         })
-    </script>
-      <!-- Apollo.io Tracking -->
-    <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
-o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-o.onload=function(){window.trackingFunctions.onLoad({appId:"666d04e9afbf87038c38c4b6"})},
-document.head.appendChild(o)}initApollo();</script>
-    
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "pu4s447cbz");
     </script>
     
       <!-- Custom styles -->
@@ -119,7 +111,7 @@ document.head.appendChild(o)}initApollo();</script>
         }        body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
             background: linear-gradient(to bottom right, #111827, #1f2937, #7c2d12);
             min-height: 100vh;
         }
@@ -381,8 +373,7 @@ document.head.appendChild(o)}initApollo();</script>
                                 className: 'text-2xl text-white'
                             }, 'Antares Intelligence')
                         ]),
-                        
-                        // Navigation Links
+                          // Navigation Links
                         React.createElement('div', {
                             key: 'nav-links',
                             className: 'hidden md:flex items-center space-x-8'
@@ -391,11 +382,17 @@ document.head.appendChild(o)}initApollo();</script>
                                 key: 'solutions',
                                 href: '#solutions',
                                 className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
-                            }, 'Solutions'),                            React.createElement('a', {
+                            }, 'Solutions'),
+                            React.createElement('a', {
                                 key: 'benefits',
                                 href: '#benefits',
                                 className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
                             }, 'Benefits'),
+                            React.createElement('a', {
+                                key: 'blog',
+                                href: 'blog.html',
+                                className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
+                            }, 'Blog'),
                             // Testimonials link temporarily hidden until Success Stories content is added
                             /*
                             React.createElement('a', {
@@ -493,7 +490,7 @@ document.head.appendChild(o)}initApollo();</script>
                         }, 'Custom AI Agents. Infinite Potential.'),                        React.createElement('p', {
                             key: 'subtitle',
                             className: 'text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-8 sm:mb-12 font-light opacity-90 px-2'
-                        }, 'Automate engineering, project ops, accounting, sales & more tailored end to end for SMBs.'),
+                        }, 'Automate engineering, project ops, accounting, sales & more tailored end-to-end for SMBs.'),
                           React.createElement('div', {
                             key: 'cta-buttons',
                             className: 'flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16'
