@@ -224,11 +224,31 @@
         .section-spacing {
             margin-bottom: 3rem;
         }
-        
-        /* Consistent highlight colors */
+          /* Consistent highlight colors */
         .highlight-stat {
             color: #f59e0b;
             font-weight: 700;
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
@@ -244,25 +264,89 @@
                     </a>
                 </div>
                 
-                <!-- Navigation Links -->
+                <!-- Desktop Navigation Links -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-gray-300 hover:text-amber-400 transition-colors duration-200">Home</a>
                     <a href="index.html#solutions" class="text-gray-300 hover:text-amber-400 transition-colors duration-200">Solutions</a>
+                    <a href="index.html#benefits" class="text-gray-300 hover:text-amber-400 transition-colors duration-200">Benefits</a>
                     <a href="blog.html" class="text-amber-400 font-medium">Blog</a>
                     <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg font-medium transition-colors duration-200">Get Started</a>
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button class="text-gray-300 hover:text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white" aria-label="Toggle mobile menu">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-    </nav>    <!-- Main Content -->
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-40 bg-black/50 md:hidden">
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="mobile-menu fixed left-0 top-0 h-full w-80 bg-gray-900 border-r border-white/10 flex flex-col">
+            <!-- Menu Header -->
+            <div class="flex items-center justify-between p-4 border-b border-white/10">
+                <div class="flex items-center space-x-3">
+                    <img src="AntaresIntelligence.png" alt="Antares Intelligence" class="w-8 h-8">
+                    <span class="text-xl font-bold text-amber-400">Antares Intelligence</span>
+                </div>
+            </div>
+            
+            <!-- Menu Items -->
+            <div class="flex-1 px-4 py-6 space-y-2">
+                <a href="index.html" class="block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span>Home</span>
+                    </div>
+                </a>
+                
+                <a href="index.html#solutions" class="block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                        <span>Solutions</span>
+                    </div>
+                </a>
+                
+                <a href="index.html#benefits" class="block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span>Benefits</span>
+                    </div>
+                </a>
+                
+                <a href="blog.html" class="block px-4 py-3 text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-lg text-lg font-medium">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        </svg>
+                        <span>Blog</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="p-4 border-t border-white/10">
+                <a href="index.html#contact" class="block w-full bg-amber-500 hover:bg-amber-600 text-black px-6 py-3 rounded-lg font-semibold text-center transition-colors duration-200">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </div><!-- Main Content -->
     <main class="pt-24 pb-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Article Header -->
@@ -1360,9 +1444,74 @@
                 </div>
                 <div class="text-sm text-gray-400">
                     © 2025 Antares Intelligence. All rights reserved.
-                </div>
-            </div>
+                </div>            </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                
+                if (isMenuOpen) {
+                    // Open menu
+                    mobileMenuOverlay.classList.add('open');
+                    mobileMenu.classList.add('open');
+                    menuIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    // Close menu
+                    mobileMenuOverlay.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Toggle menu when button is clicked
+            mobileMenuButton.addEventListener('click', toggleMenu);
+
+            // Close menu when overlay is clicked
+            mobileMenuOverlay.addEventListener('click', function(e) {
+                if (e.target === mobileMenuOverlay) {
+                    toggleMenu();
+                }
+            });
+
+            // Close menu when a link is clicked
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (isMenuOpen) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Close menu with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+
+            // Handle window resize - close menu if desktop size
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768 && isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
