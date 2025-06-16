@@ -139,9 +139,18 @@
         /* Horizontal Scroll Hijacking - Process Section */
         .process-section {
             position: relative;
-            height: 200vh; /* Height for scroll hijacking */
+            height: 150vh; /* Reduced height for better scroll control */
             overflow-x: hidden; /* Prevent horizontal page scrolling */
             overflow-y: auto; /* Allow controlled vertical scrolling */
+        }
+        
+        /* Fixed header during horizontal scrolling */
+        .process-header-fixed {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(to bottom, #111827 0%, #111827 70%, transparent 100%);
+            backdrop-filter: blur(10px);
         }
         
         .process-container {
@@ -155,6 +164,8 @@
             padding: 0; /* No vertical padding */
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* Internet Explorer 10+ */
+            margin-top: -100px; /* Offset for fixed header height */
+            padding-top: 100px; /* Add padding to account for header */
         }
         
         .process-container::-webkit-scrollbar {
@@ -187,10 +198,11 @@
             display: flex;
             align-items: center;
             gap: 2rem;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             padding: 0;
             will-change: transform;
             transform: translateZ(0);
+            backface-visibility: hidden;
         }
         
         .process-step {
@@ -227,7 +239,7 @@
         /* Mobile Responsive Design */
         @media (max-width: 768px) {
             .process-section {
-                height: 380vh; /* Increase height to allow all cards to be seen with extra scrolling */
+                height: 250vh; /* Reduced height for better mobile scroll control */
                 -webkit-overflow-scrolling: touch;
                 scroll-behavior: smooth;
             }
@@ -240,7 +252,7 @@
                 backface-visibility: hidden;
                 -webkit-perspective: 1000;
                 perspective: 1000;
-                transition: transform 0.2s ease-out;
+                transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             }
             
             .process-step {
@@ -259,17 +271,18 @@
             }
             
             .process-container {
-                padding: 0 0.5rem; /* No vertical padding */
+                padding: 80px 0.5rem 0; /* Account for mobile header height */
                 justify-content: flex-start;
                 overflow-x: hidden !important; /* Hide horizontal scrollbar */
                 overflow-y: hidden !important; /* Hide vertical scrollbar */
+                margin-top: -80px; /* Offset for mobile header */
             }
         }
         
         /* Small Mobile */
         @media (max-width: 480px) {
             .process-section {
-                height: 420vh; /* Increase height for all cards with extra scrolling */
+                height: 280vh; /* Reduced height for better mobile scroll control */
             }
             
             .process-step {
@@ -301,7 +314,7 @@
         /* Extra Small Mobile */
         @media (max-width: 360px) {
             .process-section {
-                height: 450vh; /* Increase height for all cards with extra scrolling */
+                height: 300vh; /* Reduced height for better mobile scroll control */
             }
             
             .process-step {
@@ -1092,10 +1105,10 @@
                     id: 'process-section',
                     className: 'process-section'
                 }, [
-                    // Fixed header outside the scroll hijacking
+                    // Fixed header that stays visible during horizontal scrolling
                     React.createElement('div', {
                         key: 'process-header-fixed',
-                        className: 'text-center px-4 relative z-50'
+                        className: 'process-header-fixed text-center px-4 py-8'
                     }, [
                         React.createElement('h2', {
                             key: 'process-title',
@@ -1131,15 +1144,15 @@
                                     }, '1'),
                                     React.createElement('h3', {
                                         key: 'step-1-title',
-                                        className: 'text-xl font-bold text-amber-400 mb-2'
+                                        className: 'text-2xl font-bold text-amber-400 mb-2'
                                     }, 'Discovery Call'),
                                     React.createElement('div', {
                                         key: 'step-1-duration',
-                                        className: 'text-base text-yellow-400 font-semibold mb-3'
+                                        className: 'text-lg text-yellow-400 font-semibold mb-3'
                                     }, '(1-2 days)'),
                                     React.createElement('p', {
                                         key: 'step-1-desc',
-                                        className: 'text-base text-gray-300 leading-relaxed'
+                                        className: 'text-lg text-gray-300 leading-relaxed'
                                     }, 'Understanding your specific use case and requirements')
                                 ])
                             ]),
@@ -1783,8 +1796,10 @@
             const containerWidth = containerRect.width;
             const viewportWidth = window.innerWidth;
             
-            // Use container width that respects both parent container and mobile constraints
-            const effectiveWidth = Math.min(containerWidth, viewportWidth);
+            // Use appropriate width based on device type
+            // For mobile, subtract container padding (0.5rem = 8px on each side = 16px total)
+            const mobileContainerPadding = isMobile ? 16 : 0;
+            const effectiveWidth = isMobile ? (viewportWidth - mobileContainerPadding) : Math.min(containerWidth, viewportWidth);
             
             console.log(`Container dimensions: containerWidth=${containerWidth}, viewportWidth=${viewportWidth}, effectiveWidth=${effectiveWidth}, isMobile=${isMobile}`);
 
@@ -1818,18 +1833,18 @@
             
             console.log(`Track dimensions: stepWidth=${stepWidth}, contentWidth=${contentWidth}`);
 
-            // Initial positioning - different for mobile and desktop
+            // Initial positioning - different approach for mobile vs desktop
+            let initialCenterX;
             if (isMobile) {
-                // MOBILE: Center card 1 using the working CSS centering formula
-                const centerX = (viewportWidth - stepWidth) / 2;
-                gsap.set(processTrack, { x: centerX });
-                console.log(`Mobile Initial - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth}, stepWidth: ${stepWidth})`);
+                // Mobile: Use full viewport width for centering
+                initialCenterX = (viewportWidth - stepWidth) / 2;
+                console.log(`Mobile Initial - Card 1 centered at x: ${initialCenterX} (viewport: ${viewportWidth}, stepWidth: ${stepWidth})`);
             } else {
-                // DESKTOP: Use working desktop logic
-                const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
-                gsap.set(processTrack, { x: discoveryCenterX });
-                console.log(`Desktop Initial - Discovery Call positioned at center: x = ${discoveryCenterX} (effective width: ${effectiveWidth})`);
+                // Desktop: Use effective width
+                initialCenterX = (effectiveWidth - stepWidth) / 2;
+                console.log(`Desktop Initial - Card 1 centered at x: ${initialCenterX} (effective width: ${effectiveWidth}, stepWidth: ${stepWidth})`);
             }
+            gsap.set(processTrack, { x: initialCenterX });
 
             // Horizontal scroll hijacking
             ScrollTrigger.create({
@@ -1841,25 +1856,33 @@
                 scrub: isMobile ? 2.5 : 1.8, // Slower, more controlled response for better user experience
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
+                refreshPriority: -1, // Lower priority for smoother interaction
+                fastScrollEnd: true, // Better handling of fast scroll ending
                 onUpdate: (self) => {
                     const progress = self.progress;
+                    const direction = self.direction; // Get scroll direction (-1 for backward, 1 for forward)
                     
                     if (isMobile) {
-                        // MOBILE: Smooth continuous horizontal scrolling
+                        // MOBILE: Enhanced bidirectional smooth scrolling
                         const cardProgress = progress * (totalSteps - 1);
                         
-                        // Smooth interpolation between cards instead of discrete jumping
+                        // Smooth interpolation between cards using full viewport width
                         const centerX = (viewportWidth - stepWidth) / 2;
                         const cardSpacing = stepWidth + gap;
                         const translateX = centerX - (cardProgress * cardSpacing);
                         
+                        // Direction-aware animation timing for consistent feel
+                        const animationDuration = direction < 0 ? 0.2 : 0.15; // Slightly longer for backward
+                        const easeType = direction < 0 ? "power1.inOut" : "power1.out"; // Smoother easing for backward
+                        
                         gsap.to(processTrack, {
                             x: translateX,
-                            duration: 0.15,
-                            ease: "power1.out"
+                            duration: animationDuration,
+                            ease: easeType,
+                            overwrite: "auto" // Prevent animation conflicts
                         });
                         
-                        console.log(`Mobile Smooth - Progress: ${progress.toFixed(3)}, CardProgress: ${cardProgress.toFixed(2)}, translateX: ${translateX.toFixed(0)}`);
+                        console.log(`Mobile Smooth - Progress: ${progress.toFixed(3)}, Direction: ${direction}, CardProgress: ${cardProgress.toFixed(2)}, translateX: ${translateX.toFixed(0)}`);
                     } else {
                         // DESKTOP: Keep working desktop logic unchanged
                         const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
@@ -1879,52 +1902,44 @@
                 onEnter: () => {
                     console.log('ENTER: Horizontal scrolling begins');
                     
+                    let centerX;
                     if (isMobile) {
-                        // MOBILE: Center card #1 using same formula as initial positioning
-                        const centerX = (viewportWidth - stepWidth) / 2;
-                        gsap.to(processTrack, { 
-                            x: centerX,
-                            duration: 0.8,
-                            ease: "power2.out"
-                        });
-                        console.log(`Mobile Entered - Card 1 centered at x: ${centerX}`);
+                        // Mobile: Use full viewport width
+                        centerX = (viewportWidth - stepWidth) / 2;
+                        console.log(`Mobile Entered - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth})`);
                     } else {
-                        // DESKTOP: Keep working desktop logic
-                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
-                        gsap.to(processTrack, { 
-                            x: discoveryCenterX,
-                            duration: 0.8,
-                            ease: "power2.out"
-                        });
-                        console.log(`Desktop Entered - Discovery Call centered at x: ${discoveryCenterX}`);
+                        // Desktop: Use effective width
+                        centerX = (effectiveWidth - stepWidth) / 2;
+                        console.log(`Desktop Entered - Card 1 centered at x: ${centerX} (effective width: ${effectiveWidth})`);
                     }
+                    gsap.to(processTrack, { 
+                        x: centerX,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
                 },
                 onEnterBack: () => {
+                    let centerX;
                     if (isMobile) {
-                        // MOBILE: Center card #1 (Discovery Call) perfectly
-                        const centerX = (viewportWidth - stepWidth) / 2;
-                        gsap.to(processTrack, { 
-                            x: centerX,
-                            duration: 0.8,
-                            ease: "power2.out"
-                        });
-                        console.log(`Mobile Entered Back - Card 1 centered at x: ${centerX}`);
+                        // Mobile: Use full viewport width
+                        centerX = (viewportWidth - stepWidth) / 2;
+                        console.log(`Mobile Entered Back - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth})`);
                     } else {
-                        // DESKTOP: Keep working desktop logic
-                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
-                        gsap.to(processTrack, { 
-                            x: discoveryCenterX,
-                            duration: 0.8,
-                            ease: "power2.out"
-                        });
-                        console.log(`Desktop Entered Back - centering card 1 at x: ${discoveryCenterX}`);
+                        // Desktop: Use effective width
+                        centerX = (effectiveWidth - stepWidth) / 2;
+                        console.log(`Desktop Entered Back - Card 1 centered at x: ${centerX} (effective width: ${effectiveWidth})`);
                     }
+                    gsap.to(processTrack, { 
+                        x: centerX,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
                 },
                 onLeave: () => {
                     console.log('LEAVE: Horizontal scrolling ends');
                     
                     if (isMobile) {
-                        // MOBILE: Show last card (Card 10 - Result) centered
+                        // MOBILE: Show last card (Card 10 - Result) centered using viewport width
                         const centerX = (viewportWidth - stepWidth) / 2;
                         const cardSpacing = stepWidth + gap;
                         const lastCardPosition = centerX - ((totalSteps - 1) * cardSpacing);
@@ -1951,25 +1966,21 @@
                 onLeaveBack: () => {
                     console.log('LEAVE BACK: Horizontal scrolling ends (backward)');
                     
+                    let centerX;
                     if (isMobile) {
-                        // MOBILE: Center card #1 (Discovery Call) perfectly
-                        const centerX = (viewportWidth - stepWidth) / 2;
-                        gsap.to(processTrack, { 
-                            x: centerX,
-                            duration: 0.5,
-                            ease: "power2.out"
-                        });
-                        console.log(`Mobile Leaving Back - Card 1 centered at x: ${centerX}`);
+                        // Mobile: Use full viewport width
+                        centerX = (viewportWidth - stepWidth) / 2;
+                        console.log(`Mobile Leaving Back - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth})`);
                     } else {
-                        // DESKTOP: Keep working desktop logic
-                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
-                        gsap.to(processTrack, { 
-                            x: discoveryCenterX,
-                            duration: 0.5,
-                            ease: "power2.out"
-                        });
-                        console.log(`Desktop Leaving back - centering card 1 at x: ${discoveryCenterX}`);
+                        // Desktop: Use effective width
+                        centerX = (effectiveWidth - stepWidth) / 2;
+                        console.log(`Desktop Leaving Back - Card 1 centered at x: ${centerX} (effective width: ${effectiveWidth})`);
                     }
+                    gsap.to(processTrack, { 
+                        x: centerX,
+                        duration: 0.5,
+                        ease: "power2.out"
+                    });
                 }
             });
 
