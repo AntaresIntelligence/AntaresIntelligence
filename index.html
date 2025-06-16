@@ -189,11 +189,13 @@
             gap: 2rem;
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             padding: 0;
+            will-change: transform;
+            transform: translateZ(0);
         }
         
         .process-step {
             flex-shrink: 0;
-            width: 350px;
+            width: 450px;
             height: 280px; /* Increased height to utilize available space */
             max-width: 90vw;
         }
@@ -217,7 +219,7 @@
         /* Tablet Responsive Design */
         @media (max-width: 1024px) and (min-width: 769px) {
             .process-step {
-                width: 320px;
+                width: 420px;
                 height: 260px; /* Increased for better space utilization */
             }
         }
@@ -225,15 +227,24 @@
         /* Mobile Responsive Design */
         @media (max-width: 768px) {
             .process-section {
-                height: 320vh; /* Increase height to allow all cards to be seen with extra scrolling */
+                height: 380vh; /* Increase height to allow all cards to be seen with extra scrolling */
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
             }
             
             .process-track {
                 gap: 2rem; /* Add spacing between cards */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-perspective: 1000;
+                perspective: 1000;
+                transition: transform 0.2s ease-out;
             }
             
             .process-step {
-                width: 400px;
+                width: 500px;
                 height: 240px; /* Increased height for better space usage */
                 max-width: 90vw;
                 flex-shrink: 0;
@@ -258,7 +269,7 @@
         /* Small Mobile */
         @media (max-width: 480px) {
             .process-section {
-                height: 350vh; /* Increase height for all cards with extra scrolling */
+                height: 420vh; /* Increase height for all cards with extra scrolling */
             }
             
             .process-step {
@@ -290,7 +301,7 @@
         /* Extra Small Mobile */
         @media (max-width: 360px) {
             .process-section {
-                height: 380vh; /* Increase height for all cards with extra scrolling */
+                height: 450vh; /* Increase height for all cards with extra scrolling */
             }
             
             .process-step {
@@ -1781,15 +1792,15 @@
             let stepWidth, gap, arrowWidth;
             
             if (window.innerWidth > 1024) {
-                stepWidth = 350;
+                stepWidth = 450;
                 gap = 32;
                 arrowWidth = 60;
             } else if (window.innerWidth > 768) {
-                stepWidth = 320;
+                stepWidth = 420;
                 gap = 32;
                 arrowWidth = 60;
             } else if (window.innerWidth > 480) {
-                stepWidth = 400;
+                stepWidth = 500;
                 gap = 32; // 2rem spacing between cards on mobile
                 arrowWidth = 0; // No arrows on mobile
             } else if (window.innerWidth > 360) {
@@ -1827,28 +1838,28 @@
                 end: "bottom bottom",
                 pin: ".process-container",
                 pinSpacing: false,
-                scrub: 1, // Smooth bidirectional scrolling with 1 second lag
+                scrub: isMobile ? 1.5 : 1, // Slower, more controlled response on mobile for both directions
                 anticipatePin: 1,
+                invalidateOnRefresh: true,
                 onUpdate: (self) => {
                     const progress = self.progress;
                     
                     if (isMobile) {
-                        // MOBILE: Card-by-card horizontal scrolling
+                        // MOBILE: Smooth continuous horizontal scrolling
                         const cardProgress = progress * (totalSteps - 1);
-                        const currentCardIndex = Math.floor(cardProgress);
                         
-                        // Center the current card in viewport
+                        // Smooth interpolation between cards instead of discrete jumping
                         const centerX = (viewportWidth - stepWidth) / 2;
                         const cardSpacing = stepWidth + gap;
-                        const translateX = centerX - (currentCardIndex * cardSpacing);
+                        const translateX = centerX - (cardProgress * cardSpacing);
                         
                         gsap.to(processTrack, {
                             x: translateX,
-                            duration: 0.1,
+                            duration: 0.15,
                             ease: "power1.out"
                         });
                         
-                        console.log(`Mobile Card-by-Card - Progress: ${progress.toFixed(3)}, Card: ${currentCardIndex + 1}, translateX: ${translateX.toFixed(0)}`);
+                        console.log(`Mobile Smooth - Progress: ${progress.toFixed(3)}, CardProgress: ${cardProgress.toFixed(2)}, translateX: ${translateX.toFixed(0)}`);
                     } else {
                         // DESKTOP: Keep working desktop logic unchanged
                         const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
