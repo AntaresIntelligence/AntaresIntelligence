@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>Custom AI Agents. Infinite Potential.</title>
-    <meta name="description" content="Transform your business with custom AI agents. Automate engineering, project ops, accounting, sales & more tailored end to end for SMBs.">
+    <title>AI-Powered Business Intelligence for SMBs</title>
+    <meta name="description" content="We help SMBs implement AI solutions that actually work without the complexity or excessive cost of custom development.">
     <meta name="keywords" content="AI agents, business automation, custom AI solutions, SMB automation, sales intelligence, contract management, artificial intelligence">
     <meta name="author" content="Antares Intelligence">
     <meta name="robots" content="index, follow">
@@ -17,8 +17,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://antaresIntelligence.vercel.app/">
-    <meta property="og:title" content="Custom AI Agents. Infinite Potential. | Antares Intelligence">
-    <meta property="og:description" content="Transform your business with custom AI agents. Automate engineering, project ops, accounting, sales & more tailored end to end for SMBs.">
+    <meta property="og:title" content="AI-Powered Business Intelligence for SMBs | Antares Intelligence">
+    <meta property="og:description" content="We help SMBs implement AI solutions that actually work without the complexity or excessive cost of custom development.">
     <meta property="og:image" content="https://antaresIntelligence.vercel.app/AntaresIntelligence.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -28,8 +28,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://antaresIntelligence.vercel.app/">
-    <meta property="twitter:title" content="Custom AI Agents. Infinite Potential. | Antares Intelligence">
-    <meta property="twitter:description" content="Transform your business with custom AI agents. Automate engineering, project ops, accounting, sales & more tailored end to end for SMBs.">
+    <meta property="twitter:title" content="AI-Powered Business Intelligence for SMBs | Antares Intelligence">
+    <meta property="twitter:description" content="We help SMBs implement AI solutions that actually work without the complexity or excessive cost of custom development.">
     <meta property="twitter:image" content="https://antaresIntelligence.vercel.app/AntaresIntelligence.png">
     
     <!-- Additional Meta Tags -->
@@ -959,10 +959,10 @@
                     }, [React.createElement('h1', {
                             key: 'title',
                             className: 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse'
-                        }, 'Custom AI Agents. Infinite Potential.'),                        React.createElement('p', {
+                        }, 'AI-Powered Business Intelligence for SMBs'),                        React.createElement('p', {
                             key: 'subtitle',
                             className: 'text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 mb-8 sm:mb-12 font-light opacity-90 px-2'
-                        }, 'Automate engineering, project ops, accounting, sales & more tailored end-to-end for SMBs.'),
+                        }, 'We help SMBs implement AI solutions that actually work without the complexity or excessive cost of custom development.'),
                           React.createElement('div', {
                             key: 'cta-buttons',
                             className: 'flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16'
@@ -1786,7 +1786,6 @@
             }
 
             const totalSteps = processSteps.length;
-            console.log(`Found ${totalSteps} process steps for horizontal scroll`);
 
             // Check if mobile first
             const isMobile = window.innerWidth <= 768;
@@ -1801,7 +1800,6 @@
             const mobileContainerPadding = isMobile ? 16 : 0;
             const effectiveWidth = isMobile ? (viewportWidth - mobileContainerPadding) : Math.min(containerWidth, viewportWidth);
             
-            console.log(`Container dimensions: containerWidth=${containerWidth}, viewportWidth=${viewportWidth}, effectiveWidth=${effectiveWidth}, isMobile=${isMobile}`);
 
             // Calculate dimensions for horizontal scroll - matching CSS breakpoints exactly
             let stepWidth, gap, arrowWidth;
@@ -1831,20 +1829,24 @@
             // Calculate total track width
             const contentWidth = (stepWidth + gap) * totalSteps + (arrowWidth * (totalSteps - 1));
             
-            console.log(`Track dimensions: stepWidth=${stepWidth}, contentWidth=${contentWidth}`);
 
             // Initial positioning - different approach for mobile vs desktop
             let initialCenterX;
             if (isMobile) {
                 // Mobile: Use full viewport width for centering
                 initialCenterX = (viewportWidth - stepWidth) / 2;
-                console.log(`Mobile Initial - Card 1 centered at x: ${initialCenterX} (viewport: ${viewportWidth}, stepWidth: ${stepWidth})`);
             } else {
                 // Desktop: Use effective width
                 initialCenterX = (effectiveWidth - stepWidth) / 2;
-                console.log(`Desktop Initial - Card 1 centered at x: ${initialCenterX} (effective width: ${effectiveWidth}, stepWidth: ${stepWidth})`);
             }
             gsap.set(processTrack, { x: initialCenterX });
+
+            // Clear any existing ScrollTrigger instances for this section
+            ScrollTrigger.getAll().forEach(trigger => {
+                if (trigger.trigger === processSection) {
+                    trigger.kill();
+                }
+            });
 
             // Horizontal scroll hijacking
             ScrollTrigger.create({
@@ -1853,7 +1855,7 @@
                 end: "bottom bottom",
                 pin: ".process-container",
                 pinSpacing: false,
-                scrub: isMobile ? 2.5 : 1.8, // Slower, more controlled response for better user experience
+                scrub: isMobile ? 9.0 : 6.0, // 3x slower scrolling for better content readability
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
                 refreshPriority: -1, // Lower priority for smoother interaction
@@ -1871,18 +1873,12 @@
                         const cardSpacing = stepWidth + gap;
                         const translateX = centerX - (cardProgress * cardSpacing);
                         
-                        // Direction-aware animation timing for consistent feel
-                        const animationDuration = direction < 0 ? 0.2 : 0.15; // Slightly longer for backward
-                        const easeType = direction < 0 ? "power1.inOut" : "power1.out"; // Smoother easing for backward
-                        
                         gsap.to(processTrack, {
                             x: translateX,
-                            duration: animationDuration,
-                            ease: easeType,
-                            overwrite: "auto" // Prevent animation conflicts
+                            duration: 0.15,
+                            ease: "power1.out",
+                            overwrite: true
                         });
-                        
-                        console.log(`Mobile Smooth - Progress: ${progress.toFixed(3)}, Direction: ${direction}, CardProgress: ${cardProgress.toFixed(2)}, translateX: ${translateX.toFixed(0)}`);
                     } else {
                         // DESKTOP: Keep working desktop logic unchanged
                         const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
@@ -1892,25 +1888,21 @@
                         
                         gsap.to(processTrack, {
                             x: translateX,
-                            duration: 0.1,
-                            ease: "power1.out"
+                            duration: 0.08,
+                            ease: "power1.out",
+                            overwrite: true
                         });
-                        
-                        console.log(`Desktop Progress: ${progress.toFixed(3)}, translateX: ${translateX.toFixed(0)}, totalDistance: ${totalDistance.toFixed(0)}`);
                     }
                 },
                 onEnter: () => {
-                    console.log('ENTER: Horizontal scrolling begins');
                     
                     let centerX;
                     if (isMobile) {
                         // Mobile: Use full viewport width
                         centerX = (viewportWidth - stepWidth) / 2;
-                        console.log(`Mobile Entered - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth})`);
                     } else {
                         // Desktop: Use effective width
                         centerX = (effectiveWidth - stepWidth) / 2;
-                        console.log(`Desktop Entered - Card 1 centered at x: ${centerX} (effective width: ${effectiveWidth})`);
                     }
                     gsap.to(processTrack, { 
                         x: centerX,
@@ -1923,11 +1915,9 @@
                     if (isMobile) {
                         // Mobile: Use full viewport width
                         centerX = (viewportWidth - stepWidth) / 2;
-                        console.log(`Mobile Entered Back - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth})`);
                     } else {
                         // Desktop: Use effective width
                         centerX = (effectiveWidth - stepWidth) / 2;
-                        console.log(`Desktop Entered Back - Card 1 centered at x: ${centerX} (effective width: ${effectiveWidth})`);
                     }
                     gsap.to(processTrack, { 
                         x: centerX,
@@ -1936,7 +1926,6 @@
                     });
                 },
                 onLeave: () => {
-                    console.log('LEAVE: Horizontal scrolling ends');
                     
                     if (isMobile) {
                         // MOBILE: Show last card (Card 10 - Result) centered using viewport width
@@ -1948,7 +1937,6 @@
                             duration: 0.5,
                             ease: "power2.out"
                         });
-                        console.log(`Mobile Leaving - Card ${totalSteps} (Result) centered at x: ${lastCardPosition}`);
                     } else {
                         // DESKTOP: Keep working desktop logic
                         const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
@@ -1960,21 +1948,17 @@
                             duration: 0.5,
                             ease: "power2.out"
                         });
-                        console.log(`Desktop Leaving - final position with extra scroll at x: ${endPosition}`);
                     }
                 },
                 onLeaveBack: () => {
-                    console.log('LEAVE BACK: Horizontal scrolling ends (backward)');
                     
                     let centerX;
                     if (isMobile) {
                         // Mobile: Use full viewport width
                         centerX = (viewportWidth - stepWidth) / 2;
-                        console.log(`Mobile Leaving Back - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth})`);
                     } else {
                         // Desktop: Use effective width
                         centerX = (effectiveWidth - stepWidth) / 2;
-                        console.log(`Desktop Leaving Back - Card 1 centered at x: ${centerX} (effective width: ${effectiveWidth})`);
                     }
                     gsap.to(processTrack, { 
                         x: centerX,
@@ -2010,18 +1994,16 @@
                 });
             }
 
-            // Handle window resize to recalculate dimensions
+            // Handle window resize with proper debouncing
             let resizeTimeout;
             const handleResize = () => {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(() => {
-                    console.log('Window resized - reinitializing scroll hijacking');
-                    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-                    initScrollHijacking();
-                }, 250);
+                    ScrollTrigger.refresh();
+                }, 150);
             };
             
-            window.addEventListener('resize', handleResize);
+            window.addEventListener('resize', handleResize, { passive: true });
         }
 
         // Initialize scroll hijacking after component mounts
