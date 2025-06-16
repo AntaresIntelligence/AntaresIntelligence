@@ -53,6 +53,11 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
       <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- GSAP ScrollTrigger for immersive scrolling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
       <!-- Calendly -->    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     
     <!-- Flowise Chatbot -->
@@ -129,6 +134,271 @@
         /* Ensure all sections are above background */        section {
             position: relative;
             z-index: 20;
+        }
+        
+        /* Horizontal Scroll Hijacking - Process Section */
+        .process-section {
+            position: relative;
+            height: 200vh; /* Height for scroll hijacking */
+            overflow-x: hidden; /* Prevent horizontal page scrolling */
+            overflow-y: auto; /* Allow controlled vertical scrolling */
+        }
+        
+        .process-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden !important; /* Hide all scrollbars within container */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0; /* No vertical padding */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        
+        .process-container::-webkit-scrollbar {
+            display: none !important; /* WebKit */
+        }
+        
+        /* Ensure no horizontal scrolling anywhere - but allow vertical */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw;
+        }
+        
+        /* Hide all scrollbars during horizontal scroll section */
+        .process-section {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        
+        .process-section::-webkit-scrollbar {
+            display: none; /* WebKit */
+        }
+        
+        /* Prevent horizontal scrolling on all containers */
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .process-track {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 0;
+        }
+        
+        .process-step {
+            flex-shrink: 0;
+            width: 350px;
+            height: 280px; /* Increased height to utilize available space */
+            max-width: 90vw;
+        }
+        
+        .process-card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .process-arrow {
+            flex-shrink: 0;
+            font-size: 2rem;
+            color: #f59e0b;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Tablet Responsive Design */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .process-step {
+                width: 320px;
+                height: 260px; /* Increased for better space utilization */
+            }
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .process-section {
+                height: 320vh; /* Increase height to allow all cards to be seen with extra scrolling */
+            }
+            
+            .process-track {
+                gap: 2rem; /* Add spacing between cards */
+            }
+            
+            .process-step {
+                width: 400px;
+                height: 240px; /* Increased height for better space usage */
+                max-width: 90vw;
+                flex-shrink: 0;
+            }
+            
+            .process-card {
+                padding: 1.25rem !important;
+            }
+            
+            .process-arrow {
+                display: none; /* Hide arrows on mobile */
+            }
+            
+            .process-container {
+                padding: 0 0.5rem; /* No vertical padding */
+                justify-content: flex-start;
+                overflow-x: hidden !important; /* Hide horizontal scrollbar */
+                overflow-y: hidden !important; /* Hide vertical scrollbar */
+            }
+        }
+        
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .process-section {
+                height: 350vh; /* Increase height for all cards with extra scrolling */
+            }
+            
+            .process-step {
+                width: 260px;
+                height: 210px; /* Increased height for better space usage */
+                max-width: 95vw;
+                flex-shrink: 0;
+            }
+            
+            .process-track {
+                gap: 1.5rem; /* Proper spacing for small mobile */
+            }
+            
+            .process-arrow {
+                display: none; /* Hidden on small mobile */
+            }
+            
+            .process-card {
+                padding: 1rem !important;
+            }
+            
+            .process-container {
+                padding: 0; /* No padding */
+                overflow-x: hidden !important; /* Hide horizontal scrollbar */
+                overflow-y: hidden !important; /* Hide vertical scrollbar */
+            }
+        }
+        
+        /* Extra Small Mobile */
+        @media (max-width: 360px) {
+            .process-section {
+                height: 380vh; /* Increase height for all cards with extra scrolling */
+            }
+            
+            .process-step {
+                width: 240px;
+                height: 200px; /* Increased height for better space usage */
+                max-width: 98vw;
+                flex-shrink: 0;
+            }
+            
+            .process-track {
+                gap: 1rem;
+            }
+            
+            .process-container {
+                padding: 0; /* No padding */
+                overflow-x: hidden !important; /* Hide horizontal scrollbar */
+                overflow-y: hidden !important; /* Hide vertical scrollbar */
+            }
+        }
+        
+        .process-step.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 10;
+        }
+        
+        .process-step.next {
+            opacity: 0.1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(0.9) translateY(30px);
+            z-index: 2;
+        }
+        
+        .process-step.prev {
+            opacity: 0.1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(0.9) translateY(-30px);
+            z-index: 2;
+        }
+        
+        /* Enhanced card animations */
+        .process-card {
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+        
+        /* Smooth number badge animation */
+        .process-step [class*="number"] {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .process-step.active [class*="number"] {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+        }
+        
+        .process-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+        }
+        
+        
+        /* Process card styling for hijacked scroll */
+        .process-card {
+            will-change: transform;
+            margin: 0 auto;
+        }
+        
+        
+        /* Result section styling */
+        .process-result {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+        
+        .process-result.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Custom scrollbar for immersive experience */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(31, 41, 55, 0.3);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #f59e0b, #f97316);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #d97706, #ea580c);
         }
     </style>
     
@@ -431,20 +701,10 @@
                             className: 'hidden md:flex items-center space-x-8'
                         }, [
                             React.createElement('a', {
-                                key: 'solutions',
-                                href: '#solutions',
-                                className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
-                            }, 'Solutions'),
-                            React.createElement('a', {
                                 key: 'services',
                                 href: 'services.html',
                                 className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
                             }, 'Services'),
-                            React.createElement('a', {
-                                key: 'benefits',
-                                href: '#benefits',
-                                className: 'text-gray-300 hover:text-amber-400 transition-colors duration-200'
-                            }, 'Benefits'),
                             React.createElement('a', {
                                 key: 'blog',
                                 href: 'blog.html',
@@ -536,29 +796,7 @@
                         React.createElement('div', {
                             key: 'menu-items',
                             className: 'flex-1 px-4 py-6 space-y-2'
-                        }, [                            React.createElement('a', {
-                                key: 'mobile-solutions',
-                                href: '#solutions',
-                                className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: handleLinkClick
-                            }, React.createElement('div', {
-                                className: 'flex items-center space-x-3'
-                            }, [
-                                React.createElement('svg', {
-                                    key: 'solutions-icon',
-                                    className: 'w-5 h-5',
-                                    fill: 'none',
-                                    stroke: 'currentColor',
-                                    viewBox: '0 0 24 24'
-                                }, React.createElement('path', {
-                                    strokeLinecap: 'round',
-                                    strokeLinejoin: 'round',
-                                    strokeWidth: '2',
-                                    d: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'
-                                })),
-                                React.createElement('span', { key: 'solutions-text' }, 'Solutions')
-                            ])),
-
+                        }, [
                             React.createElement('a', {
                                 key: 'mobile-services',
                                 href: 'services.html',
@@ -580,29 +818,6 @@
                                     d: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2v0'
                                 })),
                                 React.createElement('span', { key: 'services-text' }, 'Services')
-                            ])),
-
-                            React.createElement('a', {
-                                key: 'mobile-benefits',
-                                href: '#benefits',
-                                className: 'block px-4 py-3 text-gray-300 hover:text-amber-400 hover:bg-white/5 rounded-lg transition-colors duration-200 text-lg',
-                                onClick: handleLinkClick
-                            }, React.createElement('div', {
-                                className: 'flex items-center space-x-3'
-                            }, [
-                                React.createElement('svg', {
-                                    key: 'benefits-icon',
-                                    className: 'w-5 h-5',
-                                    fill: 'none',
-                                    stroke: 'currentColor',
-                                    viewBox: '0 0 24 24'
-                                }, React.createElement('path', {
-                                    strokeLinecap: 'round',
-                                    strokeLinejoin: 'round',
-                                    strokeWidth: '2',
-                                    d: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'
-                                })),
-                                React.createElement('span', { key: 'benefits-text' }, 'Benefits')
                             ])),
 
                             React.createElement('a', {
@@ -858,7 +1073,156 @@
                     className: 'py-16 md:py-32 px-4'
                 }, [
                     React.createElement(ServicesGrid, { key: 'services-grid' })
-                ]),                // Problem Section
+                ]),
+
+                // Antares Intelligence Process Section - Clean Scroll Hijacking
+                React.createElement('section', {
+                    key: 'process',
+                    id: 'process-section',
+                    className: 'process-section'
+                }, [
+                    // Fixed header outside the scroll hijacking
+                    React.createElement('div', {
+                        key: 'process-header-fixed',
+                        className: 'text-center px-4 relative z-50'
+                    }, [
+                        React.createElement('h2', {
+                            key: 'process-title',
+                            className: 'text-3xl sm:text-4xl md:text-5xl font-bold mb-0 text-amber-500'
+                        }, 'The Antares Intelligence Process'),
+                        React.createElement('p', {
+                            key: 'process-subtitle',
+                            className: 'text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4'
+                        }, 'Our proven 9-step methodology ensures rapid, reliable delivery of AI solutions tailored to your business needs.')
+                    ]),
+                    
+                    // Sticky container for horizontal scroll hijacking with max-width constraint
+                    React.createElement('div', {
+                        key: 'process-container',
+                        className: 'process-container max-w-7xl mx-auto px-4'
+                    }, [
+                        React.createElement('div', {
+                            key: 'process-track',
+                            className: 'process-track'
+                        }, [
+                            // Step 1
+                            React.createElement('div', {
+                                key: 'step-1',
+                                className: 'process-step text-center'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'step-1-card',
+                                    className: 'process-card bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 relative shadow-2xl h-full'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'step-1-number',
+                                        className: 'absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-black font-bold text-sm shadow-lg'
+                                    }, '1'),
+                                    React.createElement('h3', {
+                                        key: 'step-1-title',
+                                        className: 'text-xl font-bold text-amber-400 mb-2'
+                                    }, 'Discovery Call'),
+                                    React.createElement('div', {
+                                        key: 'step-1-duration',
+                                        className: 'text-base text-yellow-400 font-semibold mb-3'
+                                    }, '(1-2 days)'),
+                                    React.createElement('p', {
+                                        key: 'step-1-desc',
+                                        className: 'text-base text-gray-300 leading-relaxed'
+                                    }, 'Understanding your specific use case and requirements')
+                                ])
+                            ]),
+
+                            // Arrow 1
+                            React.createElement('div', {
+                                key: 'arrow-1',
+                                className: 'process-arrow'
+                            }, '→'),
+
+                            // Steps 2-9 with arrows
+                            ...Array.from({ length: 8 }, (_, i) => {
+                                const stepNum = i + 2;
+                                const steps = [
+                                    { title: 'Feasibility Evaluation', duration: '(2-3 days)', desc: 'Technical viability and business impact assessment' },
+                                    { title: 'v0 Proof of Concept', duration: '(3-5 days)', desc: 'Working prototype to demonstrate potential' },
+                                    { title: 'Agreement & Planning', duration: '(2-3 days)', desc: 'Formalize engagement and implementation roadmap' },
+                                    { title: 'Team Embedding', duration: '(3-5 days)', desc: 'Deep integration with your workflows and processes' },
+                                    { title: 'Solution Development', duration: '(1-3 weeks)', desc: 'Building your custom AI solution' },
+                                    { title: 'Internal Testing', duration: '(3-5 days)', desc: 'Rigorous quality assurance and testing' },
+                                    { title: 'Client Testing', duration: '(1 week)', desc: 'Your testing with our support for optimization' },
+                                    { title: 'Production Deployment', duration: '(2-3 days)', desc: 'Live deployment with documentation and training' }
+                                ];
+                                
+                                return [
+                                    React.createElement('div', {
+                                        key: `step-${stepNum}`,
+                                        className: 'process-step text-center'
+                                    }, [
+                                        React.createElement('div', {
+                                            key: `step-${stepNum}-card`,
+                                            className: 'process-card bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 relative shadow-2xl h-full'
+                                        }, [
+                                            React.createElement('div', {
+                                                key: `step-${stepNum}-number`,
+                                                className: 'absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-black font-bold text-sm shadow-lg'
+                                            }, stepNum.toString()),
+                                            React.createElement('h3', {
+                                                key: `step-${stepNum}-title`,
+                                                className: 'text-2xl font-bold text-amber-400 mb-2'
+                                            }, steps[i].title),
+                                            React.createElement('div', {
+                                                key: `step-${stepNum}-duration`,
+                                                className: 'text-lg text-yellow-400 font-semibold mb-3'
+                                            }, steps[i].duration),
+                                            React.createElement('p', {
+                                                key: `step-${stepNum}-desc`,
+                                                className: 'text-lg text-gray-300 leading-relaxed'
+                                            }, steps[i].desc)
+                                        ])
+                                    ]),
+                                    
+                                    // Arrow (only for steps 2-8, not after step 9)
+                                    stepNum < 9 ? React.createElement('div', {
+                                        key: `arrow-${stepNum}`,
+                                        className: 'process-arrow'
+                                    }, '→') : null
+                                ];
+                            }).flat().filter(Boolean),
+                            
+                            // Final Arrow before Result
+                            React.createElement('div', {
+                                key: 'arrow-final',
+                                className: 'process-arrow'
+                            }, '→'),
+                            
+                            // Result section
+                            React.createElement('div', {
+                                key: 'process-result',
+                                className: 'process-step text-center'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'result-card',
+                                    className: 'process-card bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 rounded-2xl p-6 shadow-2xl h-full'
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'result-icon',
+                                        className: 'text-4xl mb-4'
+                                    }, '🚀'),
+                                    React.createElement('h3', {
+                                        key: 'result-title',
+                                        className: 'text-2xl font-bold text-green-400 mb-2'
+                                    }, 'RESULT'),
+                                    React.createElement('p', {
+                                        key: 'result-text',
+                                        className: 'text-lg text-gray-300 leading-relaxed'
+                                    }, 'Solutions delivered within 2 weeks after internal testing')
+                                ])
+                            ])
+                        ])
+                    ])
+                ]),
+
+                // Problem Section
                 React.createElement('section', {
                     key: 'problem',
                     id: 'benefits',
@@ -1377,8 +1741,281 @@
                 ])
             ]);
         }
+
+        // Horizontal Scroll Hijacking
+        function initScrollHijacking() {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                setTimeout(initScrollHijacking, 100);
+                return;
+            }
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            const processSection = document.querySelector('.process-section');
+            const processContainer = document.querySelector('.process-container');
+            const processTrack = document.querySelector('.process-track');
+            const processSteps = document.querySelectorAll('.process-step');
+
+            if (!processSection || !processContainer || !processTrack || processSteps.length === 0) {
+                setTimeout(initScrollHijacking, 200);
+                return;
+            }
+
+            const totalSteps = processSteps.length;
+            console.log(`Found ${totalSteps} process steps for horizontal scroll`);
+
+            // Check if mobile first
+            const isMobile = window.innerWidth <= 768;
+
+            // Get the actual container dimensions (respecting max-width constraints)
+            const containerRect = processContainer.getBoundingClientRect();
+            const containerWidth = containerRect.width;
+            const viewportWidth = window.innerWidth;
+            
+            // Use container width that respects both parent container and mobile constraints
+            const effectiveWidth = Math.min(containerWidth, viewportWidth);
+            
+            console.log(`Container dimensions: containerWidth=${containerWidth}, viewportWidth=${viewportWidth}, effectiveWidth=${effectiveWidth}, isMobile=${isMobile}`);
+
+            // Calculate dimensions for horizontal scroll - matching CSS breakpoints exactly
+            let stepWidth, gap, arrowWidth;
+            
+            if (window.innerWidth > 1024) {
+                stepWidth = 350;
+                gap = 32;
+                arrowWidth = 60;
+            } else if (window.innerWidth > 768) {
+                stepWidth = 320;
+                gap = 32;
+                arrowWidth = 60;
+            } else if (window.innerWidth > 480) {
+                stepWidth = 400;
+                gap = 32; // 2rem spacing between cards on mobile
+                arrowWidth = 0; // No arrows on mobile
+            } else if (window.innerWidth > 360) {
+                stepWidth = 260;
+                gap = 24; // 1.5rem spacing for small mobile
+                arrowWidth = 0;
+            } else {
+                stepWidth = 240;
+                gap = 16; // 1rem spacing for extra small mobile
+                arrowWidth = 0;
+            }
+            
+            // Calculate total track width
+            const contentWidth = (stepWidth + gap) * totalSteps + (arrowWidth * (totalSteps - 1));
+            
+            console.log(`Track dimensions: stepWidth=${stepWidth}, contentWidth=${contentWidth}`);
+
+            // Initial positioning - different for mobile and desktop
+            if (isMobile) {
+                // MOBILE: Center card 1 using the working CSS centering formula
+                const centerX = (viewportWidth - stepWidth) / 2;
+                gsap.set(processTrack, { x: centerX });
+                console.log(`Mobile Initial - Card 1 centered at x: ${centerX} (viewport: ${viewportWidth}, stepWidth: ${stepWidth})`);
+            } else {
+                // DESKTOP: Use working desktop logic
+                const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
+                gsap.set(processTrack, { x: discoveryCenterX });
+                console.log(`Desktop Initial - Discovery Call positioned at center: x = ${discoveryCenterX} (effective width: ${effectiveWidth})`);
+            }
+
+            // Horizontal scroll hijacking
+            ScrollTrigger.create({
+                trigger: processSection,
+                start: "top top",
+                end: "bottom bottom",
+                pin: ".process-container",
+                pinSpacing: false,
+                scrub: 1, // Smooth bidirectional scrolling with 1 second lag
+                anticipatePin: 1,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    
+                    if (isMobile) {
+                        // MOBILE: Card-by-card horizontal scrolling
+                        const cardProgress = progress * (totalSteps - 1);
+                        const currentCardIndex = Math.floor(cardProgress);
+                        
+                        // Center the current card in viewport
+                        const centerX = (viewportWidth - stepWidth) / 2;
+                        const cardSpacing = stepWidth + gap;
+                        const translateX = centerX - (currentCardIndex * cardSpacing);
+                        
+                        gsap.to(processTrack, {
+                            x: translateX,
+                            duration: 0.1,
+                            ease: "power1.out"
+                        });
+                        
+                        console.log(`Mobile Card-by-Card - Progress: ${progress.toFixed(3)}, Card: ${currentCardIndex + 1}, translateX: ${translateX.toFixed(0)}`);
+                    } else {
+                        // DESKTOP: Keep working desktop logic unchanged
+                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
+                        const extraScrollDistance = effectiveWidth * 0.4;
+                        const totalDistance = contentWidth - effectiveWidth + stepWidth + extraScrollDistance;
+                        const translateX = discoveryCenterX - (progress * totalDistance);
+                        
+                        gsap.to(processTrack, {
+                            x: translateX,
+                            duration: 0.1,
+                            ease: "power1.out"
+                        });
+                        
+                        console.log(`Desktop Progress: ${progress.toFixed(3)}, translateX: ${translateX.toFixed(0)}, totalDistance: ${totalDistance.toFixed(0)}`);
+                    }
+                },
+                onEnter: () => {
+                    console.log('ENTER: Horizontal scrolling begins');
+                    
+                    if (isMobile) {
+                        // MOBILE: Center card #1 using same formula as initial positioning
+                        const centerX = (viewportWidth - stepWidth) / 2;
+                        gsap.to(processTrack, { 
+                            x: centerX,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        console.log(`Mobile Entered - Card 1 centered at x: ${centerX}`);
+                    } else {
+                        // DESKTOP: Keep working desktop logic
+                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
+                        gsap.to(processTrack, { 
+                            x: discoveryCenterX,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        console.log(`Desktop Entered - Discovery Call centered at x: ${discoveryCenterX}`);
+                    }
+                },
+                onEnterBack: () => {
+                    if (isMobile) {
+                        // MOBILE: Center card #1 (Discovery Call) perfectly
+                        const centerX = (viewportWidth - stepWidth) / 2;
+                        gsap.to(processTrack, { 
+                            x: centerX,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        console.log(`Mobile Entered Back - Card 1 centered at x: ${centerX}`);
+                    } else {
+                        // DESKTOP: Keep working desktop logic
+                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
+                        gsap.to(processTrack, { 
+                            x: discoveryCenterX,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        console.log(`Desktop Entered Back - centering card 1 at x: ${discoveryCenterX}`);
+                    }
+                },
+                onLeave: () => {
+                    console.log('LEAVE: Horizontal scrolling ends');
+                    
+                    if (isMobile) {
+                        // MOBILE: Show last card (Card 10 - Result) centered
+                        const centerX = (viewportWidth - stepWidth) / 2;
+                        const cardSpacing = stepWidth + gap;
+                        const lastCardPosition = centerX - ((totalSteps - 1) * cardSpacing);
+                        gsap.to(processTrack, { 
+                            x: lastCardPosition,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                        console.log(`Mobile Leaving - Card ${totalSteps} (Result) centered at x: ${lastCardPosition}`);
+                    } else {
+                        // DESKTOP: Keep working desktop logic
+                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
+                        const extraScrollDistance = effectiveWidth * 0.4;
+                        const totalDistance = contentWidth - effectiveWidth + stepWidth + extraScrollDistance;
+                        const endPosition = discoveryCenterX - totalDistance;
+                        gsap.to(processTrack, { 
+                            x: endPosition,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                        console.log(`Desktop Leaving - final position with extra scroll at x: ${endPosition}`);
+                    }
+                },
+                onLeaveBack: () => {
+                    console.log('LEAVE BACK: Horizontal scrolling ends (backward)');
+                    
+                    if (isMobile) {
+                        // MOBILE: Center card #1 (Discovery Call) perfectly
+                        const centerX = (viewportWidth - stepWidth) / 2;
+                        gsap.to(processTrack, { 
+                            x: centerX,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                        console.log(`Mobile Leaving Back - Card 1 centered at x: ${centerX}`);
+                    } else {
+                        // DESKTOP: Keep working desktop logic
+                        const discoveryCenterX = (effectiveWidth - stepWidth) / 2;
+                        gsap.to(processTrack, { 
+                            x: discoveryCenterX,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                        console.log(`Desktop Leaving back - centering card 1 at x: ${discoveryCenterX}`);
+                    }
+                }
+            });
+
+            // Add subtle hover effects to cards (only on non-touch devices)
+            if (!('ontouchstart' in window)) {
+                processSteps.forEach((step) => {
+                    const card = step.querySelector('.process-card');
+                    if (card) {
+                        card.addEventListener('mouseenter', () => {
+                            gsap.to(card, {
+                                scale: 1.05,
+                                y: -5,
+                                duration: 0.3,
+                                ease: "power2.out"
+                            });
+                        });
+
+                        card.addEventListener('mouseleave', () => {
+                            gsap.to(card, {
+                                scale: 1,
+                                y: 0,
+                                duration: 0.3,
+                                ease: "power2.out"
+                            });
+                        });
+                    }
+                });
+            }
+
+            // Handle window resize to recalculate dimensions
+            let resizeTimeout;
+            const handleResize = () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    console.log('Window resized - reinitializing scroll hijacking');
+                    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+                    initScrollHijacking();
+                }, 250);
+            };
+            
+            window.addEventListener('resize', handleResize);
+        }
+
+        // Initialize scroll hijacking after component mounts
+        function setupScrollHijacking() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initScrollHijacking);
+            } else {
+                setTimeout(initScrollHijacking, 500);
+            }
+        }
+        
         // Render the app
         ReactDOM.render(React.createElement(AntaresLanding), document.getElementById('root'));
+        
+        // Setup scroll hijacking
+        setupScrollHijacking();
     </script>
 </body>
 </html>

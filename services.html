@@ -114,11 +114,24 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15);
         }
-        
-        .feature-grid {
+          .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 1.5rem;
+            }
         }
         
         .gradient-text {
@@ -559,34 +572,32 @@
                     ])
                 ])
             ]);
-        }
-
-        // Service Card Component
+        }        // Service Card Component
         function ServiceCard({ title, subtitle, description, features, specs, timeline, useCases }) {
             return React.createElement('div', {
-                className: 'service-card bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 p-8 hover:border-amber-500/50 mb-12'
+                className: 'service-card bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 p-4 sm:p-6 lg:p-8 hover:border-amber-500/50 mb-8 lg:mb-12'
             }, [
                 React.createElement('div', {
                     key: 'header',
-                    className: 'mb-8'
+                    className: 'mb-6 lg:mb-8'
                 }, [
                     React.createElement('h2', {
                         key: 'title',
-                        className: 'text-3xl font-bold text-white mb-2'
+                        className: 'text-2xl sm:text-3xl font-bold text-white mb-2'
                     }, title),
                     React.createElement('h3', {
                         key: 'subtitle',
-                        className: 'text-xl text-amber-400 italic mb-4'
+                        className: 'text-lg sm:text-xl text-amber-400 italic mb-4'
                     }, subtitle),
                     React.createElement('p', {
                         key: 'description',
-                        className: 'text-gray-300 text-lg leading-relaxed'
+                        className: 'text-gray-300 text-base sm:text-lg leading-relaxed'
                     }, description)
                 ]),
 
                 React.createElement('div', {
                     key: 'content',
-                    className: 'space-y-8'
+                    className: 'space-y-6 lg:space-y-8'
                 }, [
                     // Features Section
                     React.createElement('div', {
@@ -594,7 +605,7 @@
                     }, [
                         React.createElement('h4', {
                             key: 'features-title',
-                            className: 'text-2xl font-semibold text-white mb-6'
+                            className: 'text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6'
                         }, "What's Included"),
                         React.createElement('div', {
                             key: 'features-grid',
@@ -602,11 +613,11 @@
                         }, features.map((feature, index) => 
                             React.createElement('div', {
                                 key: index,
-                                className: 'bg-gray-800/50 rounded-lg p-6 border border-gray-700'
+                                className: 'bg-gray-800/50 rounded-lg p-4 sm:p-6 border border-gray-700'
                             }, [
                                 React.createElement('h5', {
                                     key: 'feature-title',
-                                    className: 'text-lg font-semibold text-amber-400 mb-3'
+                                    className: 'text-base sm:text-lg font-semibold text-amber-400 mb-3'
                                 }, feature.title),
                                 React.createElement('ul', {
                                     key: 'feature-items',
@@ -655,9 +666,7 @@
                                 }, useCase.description)
                             ])
                         ))
-                    ]),
-
-                    // Technical Specs
+                    ]),                    // Technical Specs
                     specs && React.createElement('div', {
                         key: 'specs'
                     }, [
@@ -667,22 +676,23 @@
                         }, "Technical Specifications"),
                         React.createElement('div', {
                             key: 'specs-content',
-                            className: 'bg-gray-800/30 rounded-lg p-6 border border-gray-700'
+                            className: 'bg-gray-800/30 rounded-lg p-4 sm:p-6 border border-gray-700'
                         }, [
-                            React.createElement('ul', {
-                                key: 'specs-list',
-                                className: 'space-y-3'
+                            React.createElement('div', {
+                                key: 'specs-grid',
+                                className: 'grid gap-4 sm:gap-6'
                             }, specs.map((spec, index) =>
-                                React.createElement('li', {
+                                React.createElement('div', {
                                     key: index,
-                                    className: 'text-gray-300 flex items-start'
+                                    className: 'text-gray-300 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3'
                                 }, [
                                     React.createElement('span', {
                                         key: 'spec-label',
-                                        className: 'text-amber-400 font-medium min-w-0 flex-shrink-0 mr-3'
+                                        className: 'text-amber-400 font-medium text-sm sm:text-base sm:min-w-[200px] sm:flex-shrink-0'
                                     }, spec.label + ':'),
                                     React.createElement('span', {
-                                        key: 'spec-value'
+                                        key: 'spec-value',
+                                        className: 'text-gray-300 text-sm sm:text-base leading-relaxed'
                                     }, spec.value)
                                 ])
                             ))
