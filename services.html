@@ -320,8 +320,7 @@
                                 src: 'AntaresIntelligence.png',
                                 alt: 'Antares Intelligence Logo',
                                 className: 'h-8 w-8'
-                            }),
-                            React.createElement('a', {
+                            }),                            React.createElement('a', {
                                 key: 'brand-text',
                                 href: 'index.html',
                                 className: 'text-2xl text-white hover:text-amber-400 transition-colors duration-200'
@@ -729,9 +728,7 @@
                         "Performance monitoring and optimization tools"
                     ]
                 }
-            ];
-
-            const fullStackUseCases = [
+            ];            const fullStackUseCases = [
                 {
                     title: "Intelligent Customer Service Platform",
                     description: "Complete helpdesk solution with AI-powered ticket routing, automated responses, and customer sentiment analysis with intuitive agent dashboard."
@@ -749,24 +746,6 @@
                     description: "Complete customer relationship management system with predictive lead scoring, automated follow-ups, and performance analytics."
                 }
             ];
-
-            const fullStackSpecs = [
-                { label: "Frontend Technologies", value: "React, Vue.js, or Angular frameworks" },
-                { label: "Backend Infrastructure", value: "Microsoft Azure cloud services" },
-                { label: "AI/ML Platform", value: "Azure OpenAI, Azure Machine Learning" },
-                { label: "Database Solutions", value: "Azure SQL, CosmosDB, or hybrid architectures" },
-                { label: "Security Standards", value: "SOC 2, GDPR compliance, enterprise encryption" },
-                { label: "Integration Capabilities", value: "REST APIs, webhooks, direct database connections" }
-            ];
-
-            const fullStackTimeline = {
-                phases: [
-                    "Discovery & Planning: 1-2 weeks",
-                    "Development & Testing: 4-8 weeks (depending on complexity)",
-                    "Deployment & Training: 1 week"
-                ],
-                total: "Total Project Duration: 6-11 weeks"
-            };
 
             const agentFeatures = [
                 {
@@ -799,9 +778,7 @@
                         "Regular performance reports and insights"
                     ]
                 }
-            ];
-
-            const agentUseCases = [
+            ];            const agentUseCases = [
                 {
                     title: "Intelligent Email Processing Agent",
                     description: "AI agent that automatically categorizes, prioritizes, and routes emails, extracts key information, and triggers appropriate workflows in existing systems."
@@ -819,24 +796,6 @@
                     description: "Agent that analyzes equipment data, predicts maintenance needs, schedules interventions, and integrates with existing maintenance management systems."
                 }
             ];
-
-            const agentSpecs = [
-                { label: "AI Frameworks", value: "Azure OpenAI, Azure Cognitive Services, Custom ML models" },
-                { label: "Integration Methods", value: "RESTful APIs, webhooks, database connections" },
-                { label: "Deployment Options", value: "Cloud-based, on-premises, or hybrid configurations" },
-                { label: "Communication Channels", value: "Email, Slack, Teams, web interfaces, mobile apps" },
-                { label: "Data Processing", value: "Real-time and batch processing capabilities" },
-                { label: "Security Features", value: "Encrypted communications, secure authentication, audit logging" }
-            ];
-
-            const agentTimeline = {
-                phases: [
-                    "Discovery & Integration Planning: 1 week",
-                    "Agent Development & Training: 2-4 weeks",
-                    "Testing & Optimization: 1-2 weeks"
-                ],
-                total: "Total Project Duration: 4-7 weeks"
-            };
 
             return React.createElement('div', {
                 className: 'min-h-screen bg-gray-900 text-white relative overflow-hidden'
@@ -884,17 +843,14 @@
                     },
                         React.createElement('div', {
                             className: 'max-w-6xl mx-auto'
-                        }, [
-                            // Full-Stack Solutions
+                        }, [                            // Full-Stack Solutions
                             React.createElement(ServiceCard, {
                                 key: 'full-stack',
                                 title: "FULL-STACK AI SOLUTIONS",
                                 subtitle: "Complete End-to-End AI Applications",
                                 description: "Transform your business with comprehensive AI solutions that include everything you need—from user interfaces to intelligent backends—all built specifically for your workflows.",
                                 features: fullStackFeatures,
-                                useCases: fullStackUseCases,
-                                specs: fullStackSpecs,
-                                timeline: fullStackTimeline
+                                useCases: fullStackUseCases
                             }),
 
                             // AI Agents
@@ -904,9 +860,7 @@
                                 subtitle: "Targeted Intelligence for Specific Business Processes",
                                 description: "Enhance your existing systems with specialized AI agents that automate specific tasks, make intelligent decisions, and integrate seamlessly with your current technology stack.",
                                 features: agentFeatures,
-                                useCases: agentUseCases,
-                                specs: agentSpecs,
-                                timeline: agentTimeline
+                                useCases: agentUseCases
                             }),
 
                             // Choosing Guide Section
@@ -1005,63 +959,7 @@
                                         key: 'hybrid-description',
                                         className: 'text-gray-300 text-lg'
                                     }, 'Many clients benefit from a phased implementation starting with targeted AI agents to prove value, then expanding to full-stack solutions as needs grow. We can design a roadmap that evolves with your business.')
-                                ])
-                            ]),
-
-                            // All Solutions Include
-                            React.createElement('div', {
-                                key: 'all-solutions',
-                                className: 'mb-16'
-                            }, [
-                                React.createElement('h2', {
-                                    key: 'all-title',
-                                    className: 'text-4xl font-bold text-center text-white mb-12'
-                                }, 'ALL SOLUTIONS INCLUDE'),
-                                
-                                React.createElement('div', {
-                                    key: 'all-grid',
-                                    className: 'grid md:grid-cols-2 lg:grid-cols-3 gap-6'
-                                }, [
-                                    {
-                                        title: "Microsoft-Backed Technology",
-                                        description: "Enterprise-grade AI services with robust security and compliance"
-                                    },
-                                    {
-                                        title: "Embedded Development Process",
-                                        description: "Deep integration with your team to understand specific workflows"
-                                    },
-                                    {
-                                        title: "Enterprise-Grade Quality",
-                                        description: "Reliable, accurate, and production-ready implementations"
-                                    },
-                                    {
-                                        title: "Ongoing Support",
-                                        description: "Documentation, training, and maintenance capabilities"
-                                    },
-                                    {
-                                        title: "Rapid Deployment",
-                                        description: "Streamlined process delivering solutions faster than traditional implementations"
-                                    },
-                                    {
-                                        title: "Scalable Architecture",
-                                        description: "Solutions designed to grow with your business needs"
-                                    }
-                                ].map((item, index) =>
-                                    React.createElement('div', {
-                                        key: index,
-                                        className: 'bg-white/5 border border-white/20 rounded-lg p-6 hover:border-amber-500/50 transition-colors duration-300'
-                                    }, [
-                                        React.createElement('h4', {
-                                            key: 'item-title',
-                                            className: 'text-lg font-semibold text-amber-400 mb-3'
-                                        }, item.title),
-                                        React.createElement('p', {
-                                            key: 'item-description',
-                                            className: 'text-gray-300'
-                                        }, item.description)
-                                    ])
-                                ))
-                            ])
+                                ])                            ])
                         ])
                     ),
 
@@ -1127,108 +1025,74 @@
                             }, 'Contact us at antaresintelligence.com to get started.')
                         ])
                     )
+                ]),                // Contact Information Section
+                React.createElement('section', {
+                    key: 'contact-info',
+                    className: 'py-12 px-4 border-t border-gray-800'
+                }, [
+                    React.createElement('div', {
+                        key: 'contact-container',
+                        className: 'max-w-6xl mx-auto text-center'
+                    }, [
+                        // Brand section with LinkedIn
+                        React.createElement('div', {
+                            key: 'brand-section',
+                            className: 'flex items-center justify-center gap-3 mb-4'
+                        }, [
+                            React.createElement('h3', {
+                                key: 'brand-text',
+                                className: 'text-2xl font-bold text-amber-500'
+                            }, 'Antares Intelligence'),
+                            React.createElement('a', {
+                                key: 'linkedin-link',
+                                href: 'https://www.linkedin.com/company/antaresintelligence',
+                                target: '_blank',
+                                rel: 'noopener noreferrer',
+                                className: 'hover:scale-110 transition-transform duration-200'
+                            }, [
+                                React.createElement('img', {
+                                    key: 'linkedin-logo',
+                                    src: 'LinkedIn_logo_initials.png',
+                                    alt: 'LinkedIn',
+                                    className: 'w-8 h-8 hover:opacity-80 transition-opacity duration-200'
+                                })
+                            ])
+                        ]),
+                        React.createElement('p', {
+                            key: 'brand-desc',
+                            className: 'text-gray-400 mb-8'
+                        }, 'Making AI solutions accessible and affordable for all.'),
+                        React.createElement('div', {
+                            key: 'contact-details',
+                            className: 'space-y-4'
+                        }, [
+                            React.createElement('p', {
+                                key: 'email',
+                                className: 'text-gray-300 text-lg'
+                            }, 'info@antaresintelligence.com'),
+                            React.createElement('p', {
+                                key: 'address',
+                                className: 'text-gray-400 text-base'
+                            }, '201 N Union St Suite 110, Alexandria, VA 22314')
+                        ])
+                    ])
                 ]),
 
                 // Footer
                 React.createElement('footer', {
                     key: 'footer',
-                    className: 'relative z-10 bg-black/50 border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8'
-                },
+                    className: 'py-16 px-4 border-t border-gray-800'
+                }, [
                     React.createElement('div', {
-                        className: 'max-w-6xl mx-auto'
+                        key: 'footer-container',
+                        className: 'max-w-6xl mx-auto text-center'
                     }, [
-                        React.createElement('div', {
-                            key: 'footer-content',
-                            className: 'grid md:grid-cols-3 gap-8 mb-8'
-                        }, [
-                            React.createElement('div', {
-                                key: 'footer-brand',
-                                className: 'text-center md:text-left'
-                            }, [
-                                React.createElement('div', {
-                                    key: 'brand-section',
-                                    className: 'flex items-center justify-center md:justify-start space-x-3 mb-4'
-                                }, [
-                                    React.createElement('img', {
-                                        key: 'footer-logo',
-                                        src: 'AntaresIntelligence.png',
-                                        alt: 'Antares Intelligence',
-                                        className: 'w-8 h-8'
-                                    }),
-                                    React.createElement('span', {
-                                        key: 'footer-brand-text',
-                                        className: 'text-xl font-bold text-amber-400'
-                                    }, 'Antares Intelligence')
-                                ]),
-                                React.createElement('p', {
-                                    key: 'footer-description',
-                                    className: 'text-gray-400'
-                                }, 'Transforming businesses with intelligent AI solutions')
-                            ]),
-                            React.createElement('div', {
-                                key: 'footer-links',
-                                className: 'text-center'
-                            }, [
-                                React.createElement('h4', {
-                                    key: 'links-title',
-                                    className: 'text-white font-semibold mb-4'
-                                }, 'Quick Links'),
-                                React.createElement('ul', {
-                                    key: 'links-list',
-                                    className: 'space-y-2'
-                                }, [
-                                    React.createElement('li', {
-                                        key: 'link-home'
-                                    }, React.createElement('a', {
-                                        href: 'index.html',
-                                        className: 'text-gray-400 hover:text-amber-400 transition-colors duration-200'
-                                    }, 'Home')),
-                                    React.createElement('li', {
-                                        key: 'link-solutions'
-                                    }, React.createElement('a', {
-                                        href: 'index.html#solutions',
-                                        className: 'text-gray-400 hover:text-amber-400 transition-colors duration-200'
-                                    }, 'Solutions')),
-                                    React.createElement('li', {
-                                        key: 'link-services'
-                                    }, React.createElement('a', {
-                                        href: 'services.html',
-                                        className: 'text-amber-400'
-                                    }, 'Services')),
-                                    React.createElement('li', {
-                                        key: 'link-blog'
-                                    }, React.createElement('a', {
-                                        href: 'blog.html',
-                                        className: 'text-gray-400 hover:text-amber-400 transition-colors duration-200'
-                                    }, 'Blog'))
-                                ])
-                            ]),
-                            React.createElement('div', {
-                                key: 'footer-contact',
-                                className: 'text-center md:text-right'
-                            }, [
-                                React.createElement('h4', {
-                                    key: 'contact-title',
-                                    className: 'text-white font-semibold mb-4'
-                                }, 'Get in Touch'),
-                                React.createElement('a', {
-                                    key: 'contact-button',
-                                    href: 'index.html#contact',
-                                    className: 'inline-block bg-amber-500 hover:bg-amber-600 text-black px-6 py-2 rounded-lg font-medium transition-colors duration-200'
-                                }, 'Contact Us')
-                            ])
-                        ]),
-                        React.createElement('div', {
-                            key: 'footer-bottom',
-                            className: 'border-t border-white/10 pt-8 text-center'
-                        }, [
-                            React.createElement('p', {
-                                key: 'copyright',
-                                className: 'text-gray-400'
-                            }, `© ${new Date().getFullYear()} Antares Intelligence. All rights reserved.`)
-                        ])
+                        React.createElement('p', {
+                            key: 'copyright',
+                            className: 'text-gray-400'
+                        }, '© 2024 Antares Intelligence Inc. All rights reserved.')
                     ])
-                )
+                ])
             ]);
         }
 
