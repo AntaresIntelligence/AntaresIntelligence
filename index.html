@@ -195,7 +195,7 @@
         
         .process-step {
             flex-shrink: 0;
-            width: 450px;
+            width: 550px;
             height: 280px; /* Increased height to utilize available space */
             max-width: 90vw;
         }
@@ -219,7 +219,7 @@
         /* Tablet Responsive Design */
         @media (max-width: 1024px) and (min-width: 769px) {
             .process-step {
-                width: 420px;
+                width: 520px;
                 height: 260px; /* Increased for better space utilization */
             }
         }
@@ -244,7 +244,7 @@
             }
             
             .process-step {
-                width: 500px;
+                width: 600px;
                 height: 240px; /* Increased height for better space usage */
                 max-width: 90vw;
                 flex-shrink: 0;
@@ -273,7 +273,7 @@
             }
             
             .process-step {
-                width: 260px;
+                width: 360px;
                 height: 210px; /* Increased height for better space usage */
                 max-width: 95vw;
                 flex-shrink: 0;
@@ -305,7 +305,7 @@
             }
             
             .process-step {
-                width: 240px;
+                width: 340px;
                 height: 200px; /* Increased height for better space usage */
                 max-width: 98vw;
                 flex-shrink: 0;
@@ -1792,23 +1792,23 @@
             let stepWidth, gap, arrowWidth;
             
             if (window.innerWidth > 1024) {
-                stepWidth = 450;
+                stepWidth = 550;
                 gap = 32;
                 arrowWidth = 60;
             } else if (window.innerWidth > 768) {
-                stepWidth = 420;
+                stepWidth = 520;
                 gap = 32;
                 arrowWidth = 60;
             } else if (window.innerWidth > 480) {
-                stepWidth = 500;
+                stepWidth = 600;
                 gap = 32; // 2rem spacing between cards on mobile
                 arrowWidth = 0; // No arrows on mobile
             } else if (window.innerWidth > 360) {
-                stepWidth = 260;
+                stepWidth = 360;
                 gap = 24; // 1.5rem spacing for small mobile
                 arrowWidth = 0;
             } else {
-                stepWidth = 240;
+                stepWidth = 340;
                 gap = 16; // 1rem spacing for extra small mobile
                 arrowWidth = 0;
             }
@@ -1838,7 +1838,7 @@
                 end: "bottom bottom",
                 pin: ".process-container",
                 pinSpacing: false,
-                scrub: isMobile ? 1.5 : 1, // Slower, more controlled response on mobile for both directions
+                scrub: isMobile ? 2.5 : 1.8, // Slower, more controlled response for better user experience
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
