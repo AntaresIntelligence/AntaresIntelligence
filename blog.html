@@ -618,11 +618,37 @@
             const [email, setEmail] = useState('');
             const [isSubscribed, setIsSubscribed] = useState(false);
             
-            const handleSubmit = (e) => {
+            const handleSubmit = async (e) => {
                 e.preventDefault();
-                setIsSubscribed(true);
-                setTimeout(() => setIsSubscribed(false), 3000);
-                setEmail('');
+                
+                try {
+                    // n8n webhook URL for newsletter subscriptions
+                    const webhookUrl = 'https://n8n.srv843763.hstgr.cloud/webhook-test/8e146d45-63ff-49ff-86b0-3a90279081bd';
+                    
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            source: 'blog_newsletter',
+                            timestamp: new Date().toISOString(),
+                            page: 'blog'
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        setIsSubscribed(true);
+                        setTimeout(() => setIsSubscribed(false), 3000);
+                        setEmail('');
+                    } else {
+                        throw new Error('Subscription failed');
+                    }
+                } catch (error) {
+                    console.error('Newsletter subscription error:', error);
+                    alert('There was an error subscribing to the newsletter. Please try again.');
+                }
             };
             
             return React.createElement('section', {
