@@ -620,10 +620,9 @@
             
             const handleSubmit = async (e) => {
                 e.preventDefault();
-                
-                try {
+                  try {
                     // n8n webhook URL for newsletter subscriptions
-                    const webhookUrl = 'https://n8n.srv843763.hstgr.cloud/webhook-test/8e146d45-63ff-49ff-86b0-3a90279081bd';
+                    const webhookUrl = 'https://n8n.antaresintelligence.com/webhook-test/newsletter-form';
                     
                     const response = await fetch(webhookUrl, {
                         method: 'POST',
@@ -671,11 +670,10 @@
                             key: 'newsletter-title',
                             className: 'text-2xl md:text-3xl font-bold text-amber-500 mb-4'
                         }, 'Stay Ahead of the AI Revolution'),
-                        
-                        React.createElement('p', {
+                          React.createElement('p', {
                             key: 'newsletter-desc',
                             className: 'text-gray-300 mb-8 text-lg leading-relaxed'
-                        }, 'Get exclusive insights, case studies, and AI implementation strategies delivered directly to your inbox. Join thousands of business leaders transforming their operations.'),
+                        }, 'Get exclusive insights, case studies, and AI implementation strategies delivered directly to your inbox. Join business leaders transforming their operations.'),
                         
                         React.createElement('form', {
                             key: 'newsletter-form',
